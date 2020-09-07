@@ -1,48 +1,36 @@
 <section>
-    <div class="aligner">
-        <img class="logo" src="../../../../assets/logo_text.svg"/>
-      <form class="example-form" (ngSubmit)="onSubmit()" #usrForm="ngForm">
-          <mat-form-field class="input-full-width"  >
-            <input matInput ngModel id="username" name="username" type="text" placeholder="Username">
-          </mat-form-field>
-          <mat-form-field class="input-full-width">
-            <input ngx-google-places-autocomplete 
-            matInput
-            [options]="options" 
-            #placesRef="ngx-places" 
-            (onAddressChange)="handleAddressChange($event)"
-            (input)="placeSelected = false"
-            placeholder="Place"
-            ngModel
-            id="place" 
-            name="place"
-            />
-         </mat-form-field>
-          <mat-form-field class="input-full-width" >
-              <input matInput ngModel  id="email" type="email" name="email" placeholder="Email">
-          </mat-form-field>
-
-          <mat-form-field class="input-full-width" >
-              <input matInput ngModel  id="password" type="password" name="password" minlength="8" placeholder="Password">
-          </mat-form-field>
-
-          <mat-form-field class="input-full-width" >
-              <input matInput ngModel  id="confirmPassword" type="password" minlength="8" name="confirmPassword" placeholder="Confirm Password">
-          </mat-form-field>
-          <div *ngIf="usrForm.value.password !== usrForm.value.confirmPassword && usrForm.value.confirmPassword.length > 0">Passwords do not match</div>
-          <div *ngIf="usrForm.value.password?.length < 8 && usrForm.value.password?.length > 0">Passwords must be at least 8 characters</div>
-
-          <button mat-raised-button	[disabled]="(usrForm.value.password !== usrForm.value.confirmPassword) || usrForm.invalid">Sign Up</button>
-          <h3 class="signUp">Got an account? <a routerLinkActive="active" routerLink="/">Sign In</a></h3>
-        </form>
-        
-
-        <div class="alert" *ngIf="didFail">
-            Ops.. Something went wrong
-        </div>
-        <!-- <div class="loader" *ngIf="isLoading">
-            Loading...
-          </div> -->
-</div>
-
+  <div class="aligner">
+    <img class="logo" src="../../../../assets/logo_text.svg" />
+    <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="usrForm">
+      <mat-form-field class="input-full-width">
+        <input matInput id="username" name="username" type="text" placeholder="Username" formControlName="name">
+      </mat-form-field>
+      <form [formGroup]="place">
+        <mat-form-field class="input-full-width">
+          <input ngx-google-places-autocomplete matInput [options]="options" #placesRef="ngx-places"
+            formControlName="place" (onAddressChange)="handleAddressChange($event)" (input)="placeSelected = false"
+            placeholder="Place" id="place" name="place">
+        </mat-form-field>
+      </form>
+      <mat-form-field class="input-full-width">
+        <input matInput id="email" type="email" name="email" placeholder="Email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="input-full-width">
+        <input matInput id="password" type="password" name="password" minlength="8" placeholder="Password"
+          formControlName="password">
+      </mat-form-field>
+      <mat-form-field class="input-full-width">
+        <input matInput id="confirmPassword" type="password" minlength="8" name="confirmPassword"
+          placeholder="Confirm Password" formControlName="confirmPassword">
+      </mat-form-field>
+      <span *ngIf="usrForm.errors?.invalid">
+        Password doesn't match
+      </span>
+      <button mat-raised-button>Sign Up</button>
+      <h3 class="signUp">Got an account? <a routerLinkActive="active" routerLink="/">Sign In</a></h3>
+    </form>
+    <div class="alert" *ngIf="didFail">
+      Ops.. Something went wrong
+    </div>
+  </div>
 </section>
