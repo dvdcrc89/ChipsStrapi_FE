@@ -17,7 +17,7 @@ export class BusinessSignupComponent implements OnInit {
   didFail = false;
   isLoading = false;
   usrForm: FormGroup;
-  place: FormGroup;
+  bsnForm: FormGroup;
 
   placeSelected: boolean;
   brightonFirst = new google.maps.LatLngBounds(
@@ -43,7 +43,7 @@ export class BusinessSignupComponent implements OnInit {
     } = e;
     const lat = geometry.location.lat();
     const lng = geometry.location.lng();
-    this.place.setValue({
+    this.bsnForm.setValue({
       place: name,
       name,
       address: formatted_address,
@@ -59,7 +59,6 @@ export class BusinessSignupComponent implements OnInit {
   ngOnInit(): void {
     this.usrForm = this.fb.group(
       {
-        name: ['', Validators.required],
         email: ['', Validators.email],
         password: ['', Validators.required],
         confirmPassword: ['', Validators.required],
@@ -67,35 +66,40 @@ export class BusinessSignupComponent implements OnInit {
       { validator: this.passwordConfirming }
     );
 
-    (this.place = this.fb.group({
-      place: ['', Validators.required],
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      lat: ['', Validators.required],
-      lng: ['', Validators.required],
-      phone: ['', Validators.required],
-      website: ['', Validators.required],
-    }))
+    this.bsnForm = this.fb.group(
+      {
+        place: ['', Validators.required],
+        name: ['', Validators.required],
+        address: ['', Validators.required],
+        lat: ['', Validators.required],
+        lng: ['', Validators.required],
+        phone: [''],
+        website: [''],
+      }
+    );
   }
 
   onSubmit() {
+    if ( this.bsnForm.invalid && this.usrForm.invalid ) {
+      return
+    }
     // I am sure there is a much more elegant way to do this...
     const userValues = this.usrForm.value;
-    const placeValues = this.place.value;
+    const businessValues = this.bsnForm.value;
     const place = {
-      name: placeValues.name,
-      address: placeValues.address,
-      lat: placeValues.lat,
-      lng: placeValues.lng,
-      phone: placeValues.phone,
-      website: placeValues.website,
+      name: businessValues.name,
+      address: businessValues.address,
+      lat: businessValues.lat,
+      lng: businessValues.lng,
+      phone: businessValues.phone,
+      website: businessValues.website,
     };
     const formValues = {
       place,
-      username: userValues.name,
       email: userValues.email,
       password: userValues.password,
     };
+    console.log(formValues);
     this.authService.registerRestaurant(formValues);
   }
 

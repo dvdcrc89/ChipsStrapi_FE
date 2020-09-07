@@ -77,9 +77,8 @@ export class AuthService {
     return this.http.get('http://localhost:1337/auth/google/callback',opts)
   }
 
-  registerRestaurant({place, username, email, password}){
-    
-    this.http.post('http://localhost:1337/auth/local/register', {place, username, email, password})
+  registerRestaurant({place, email, password}){
+    this.http.post('http://localhost:1337/auth/local/register', {place, email, password})
     .subscribe((response:any) => {
     // Handle success.
     console.log('Well done!',response);
