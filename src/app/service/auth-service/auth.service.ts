@@ -76,4 +76,19 @@ export class AuthService {
     const opts = { params: new HttpParams({fromObject: params}) }
     return this.http.get('http://localhost:1337/auth/google/callback',opts)
   }
+
+  registerRestaurant({place, username, email, password}){
+    
+    this.http.post('http://localhost:1337/auth/local/register', {place, username, email, password})
+    .subscribe((response:any) => {
+    // Handle success.
+    console.log('Well done!',response);
+    // console.log('User profile', response.data.user);
+    // console.log('User token', response.data.jwt);
+    },
+    error => {
+      // Handle error.
+      console.log('An error occurred:', error.response);
+    })
+  }
 }

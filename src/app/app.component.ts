@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
     this.router.navigate(['/auth/user'])
   }
 
+  signup(){
+    this.router.navigate(['/auth/business/signup'])
+  }
+
   logout(){
     this.authService.logout();
   }
