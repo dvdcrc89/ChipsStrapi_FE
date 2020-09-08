@@ -5,10 +5,11 @@ import { AuthComponent } from './auth.component';
 import { SigninComponent } from './user/signin/signin.component';
 import { BusinessSigninComponent } from './business/business-signin/business-signin.component';
 import { BusinessSignupComponent } from './business/business-signup/business-signup.component';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from '../../environments/environment';
 import  {MAT_DATE_LOCALE} from '@angular/material/core';
@@ -22,6 +23,8 @@ import  {MAT_DATE_LOCALE} from '@angular/material/core';
     FormsModule,
     MatInputModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: environment.googleAPI
     }),
