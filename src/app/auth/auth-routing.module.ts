@@ -8,6 +8,7 @@ import { BusinessSigninComponent } from './business/business-signin/business-sig
 
 const routes: Routes = [
   { path: '', component: AuthComponent },
+  { path: 'callback/:provider', component: AuthComponent },
   { path: 'user', component: SigninComponent },
   { path: 'business/signup', component: BusinessSignupComponent},
   { path: 'business/signin', component: BusinessSigninComponent}

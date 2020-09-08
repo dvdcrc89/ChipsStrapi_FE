@@ -72,12 +72,22 @@ export class AuthService {
   }
 
   googleAuth(){
-    window.location.href = `${environment.url}/connect/google?callback="http://localhost:4200/auth"`;
+    window.location.href = `${environment.url}/connect/google`;
+  }
+
+  facebookAuth(){
+    window.location.href = `${environment.url}/connect/facebook`;
   }
 
   googleAuthCallback(params: Params): Observable<any>{
     const opts = { params: new HttpParams({fromObject: params}) }
     return this.http.get(`${environment.url}/auth/google/callback`,opts)
+  }
+
+  facebookAuthCallback(params: Params): Observable<any>{
+    console.log('callback')
+    const opts = { params: new HttpParams({fromObject: params}) }
+    return this.http.get(`${environment.url}/auth/facebook/callback`,opts)
   }
 
   registerRestaurant({place, email, password}){
