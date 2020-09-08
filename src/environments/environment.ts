@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   googleAPI: 'AIzaSyCy3zuAkYlalbHZP67TBXQHvqUn4nGtzs8',
   url: 'https://chipsbrighton.herokuapp.com',
-  url2: 'http://localhost:1337'
+  url1: 'http://localhost:1337'
 };
 
 /*

@@ -16,4 +16,7 @@ export class SigninComponent implements OnInit {
   googleAuth(){
     return this.authService.googleAuth();
   }
+  facebookAuth(){
+    return this.authService.facebookAuth();
+  }
 }
