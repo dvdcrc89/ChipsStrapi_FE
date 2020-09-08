@@ -6,6 +6,8 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { AuthService } from 'src/app/service/auth-service/auth.service';
+import { Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-business-signup',
@@ -14,7 +16,8 @@ import { AuthService } from 'src/app/service/auth-service/auth.service';
 })
 export class BusinessSignupComponent implements OnInit {
   confirmUser = false;
-  didFail = false;
+  didFail: boolean;
+  didFail$: Subscription;
   isLoading = false;
   usrForm: FormGroup;
   bsnForm: FormGroup;
@@ -57,10 +60,17 @@ export class BusinessSignupComponent implements OnInit {
   constructor(private authService: AuthService, public fb: FormBuilder) {}
 
   ngOnInit(): void {
+    this.didFail$ = this.authService.didFail.pipe(
+      distinctUntilChanged()
+    )
+    .subscribe((value)=>{
+      this.didFail = value
+    })
+    
     this.usrForm = this.fb.group(
       {
         email: ['', Validators.email],
-        password: ['', Validators.required],
+        password: ['', Validators.compose([Validators.required,Validators.minLength(8)])],
         confirmPassword: ['', Validators.required],
       },
       { validator: this.passwordConfirming }
@@ -107,5 +117,10 @@ export class BusinessSignupComponent implements OnInit {
     if (c.get('password').value !== c.get('confirmPassword').value) {
       return { invalid: true };
     }
+  }
+
+  ngOnDestroy(): void {
+    this.didFail$.unsubscribe();
+    
   }
 }
