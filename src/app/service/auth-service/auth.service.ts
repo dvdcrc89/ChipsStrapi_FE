@@ -3,6 +3,7 @@ import {GC_AUTH_TOKEN, GC_USER_ID} from './constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Params } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 // 1
 @Injectable({
@@ -69,21 +70,19 @@ export class AuthService {
   }
 
   googleAuth(){
-    window.location.href = 'http://localhost:1337/connect/google?callback="http://localhost:4200/auth"';
+    window.location.href = `${environment.url}/connect/google?callback="http://localhost:4200/auth"`;
   }
 
   googleAuthCallback(params: Params): Observable<any>{
     const opts = { params: new HttpParams({fromObject: params}) }
-    return this.http.get('http://localhost:1337/auth/google/callback',opts)
+    return this.http.get(`${environment.url}/auth/google/callback`,opts)
   }
 
   registerRestaurant({place, email, password}){
-    this.http.post('http://localhost:1337/auth/local/register', {place, email, password})
-    .subscribe((response:any) => {
-    // Handle success.
-    console.log('Well done!',response);
-    // console.log('User profile', response.data.user);
-    // console.log('User token', response.data.jwt);
+    this.http.post(`${environment.url}/auth/local/register`, {place, email, password})
+    .subscribe(({user, jwt}:any) => {
+      this.saveUserData(user.id, jwt);
+      this.currentUser = user;
     },
     error => {
       // Handle error.
