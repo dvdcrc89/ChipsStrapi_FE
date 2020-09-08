@@ -1,0 +1,39 @@
+$hero-height: 300px;
+
+*{
+  font-family: 'Khula', sans-serif;
+  font-weight: bold;
+}
+
+
+.hero-img {
+  background-color: aquamarine;
+  height: $hero-height;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.card {
+  width: 300px;
+  height: 350px;
+  outline: 1px solid black;
+}
+
+.hero-content {
+  height: $hero-height;
+}
+
+.card-section {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}

@@ -11,10 +11,14 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
+import { LandingPageComponent } from './pages/landing-page/landing-page.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LandingPageComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
