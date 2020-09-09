@@ -47,8 +47,9 @@ export class BusinessComponent implements OnInit {
         const { business_user } = user;
         if(!business_user) {
           this.router.navigate(['/profile/me'])
-        }
-        this.businessProfile$ = this.runProfileQuery(business_user);
+        } else {
+          this.businessProfile$ = this.runProfileQuery(business_user);
+        } 
       }
     )
   }

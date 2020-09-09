@@ -57,8 +57,10 @@ export class UserProfileComponent implements OnInit {
           business_user  
             ? this.router.navigate(['/profile/business'])
             : this.router.navigate(['/'])
+        } else {
+          this.userProfile$ = this.runProfileQuery(basic_user);
         }
-        this.userProfile$ = this.runProfileQuery(basic_user);
+        
       }
     )
   }
