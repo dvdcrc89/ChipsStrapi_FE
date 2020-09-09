@@ -14,7 +14,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './business-signup.component.html',
   styleUrls: ['./business-signup.component.scss'],
 })
-export class BusinessSignupComponent implements OnInit {
+export class BusinessSignupComponent implements OnInit,{
   confirmUser = false;
   didFail: boolean;
   didFail$: Subscription;
@@ -66,7 +66,7 @@ export class BusinessSignupComponent implements OnInit {
     .subscribe((value)=>{
       this.didFail = value
     })
-    
+
     this.usrForm = this.fb.group(
       {
         email: ['', Validators.email],
@@ -121,6 +121,6 @@ export class BusinessSignupComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.didFail$.unsubscribe();
-    
+
   }
 }
