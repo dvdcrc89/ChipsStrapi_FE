@@ -101,8 +101,6 @@ export class BusinessSignupComponent implements OnInit {
       phone: [''],
       website: [''],
     });
-
-    this.bsnForm.valueChanges.subscribe((val) => console.log(this.bsnForm));
   }
 
   onSubmit() {
@@ -136,8 +134,8 @@ export class BusinessSignupComponent implements OnInit {
   }
 
   modifyBusiness() {
-    this.bsnForm.controls.place.enable();
     this.bsnForm.reset();
+    this.bsnForm.controls.place.enable();
   }
 }
 
