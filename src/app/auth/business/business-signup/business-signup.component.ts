@@ -57,8 +57,9 @@ export class BusinessSignupComponent implements OnInit {
       if (result) {
         this.bsnForm.controls.place.disable();
         this.setBusinessFormValues(place);
+        return
       }
-      return;
+      this.modifyBusiness();
     });
   }
 
