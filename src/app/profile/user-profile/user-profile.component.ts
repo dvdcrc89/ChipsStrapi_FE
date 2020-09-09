@@ -55,7 +55,7 @@ export class UserProfileComponent implements OnInit {
         const { basic_user, business_user } = user;
         if(!basic_user) {
           business_user  
-            ? this.router.navigate(['/business'])
+            ? this.router.navigate(['/profile/business'])
             : this.router.navigate(['/'])
         }
         this.userProfile$ = this.runProfileQuery(basic_user);
@@ -67,6 +67,7 @@ export class UserProfileComponent implements OnInit {
     return this.apollo
             .watchQuery<any>({
               query: PROFILE_QUERY(id)
-            }).valueChanges;
+            })
+            .valueChanges;
    }
 }
