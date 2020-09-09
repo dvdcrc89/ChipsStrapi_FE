@@ -18,8 +18,9 @@ export class AuthService {
 
   public jwt: BehaviorSubject<string> = new BehaviorSubject(null);
 
-  // 3
   private _isAuthenticated = new BehaviorSubject(false);
+
+  public didFail: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {
   }
@@ -48,6 +49,7 @@ export class AuthService {
     this.userId = id;
     this.jwt.next(jwt);
     this._isAuthenticated.next(true);
+    this.didFail.next(false);
   }
 
   // 7
@@ -70,12 +72,22 @@ export class AuthService {
   }
 
   googleAuth(){
-    window.location.href = `${environment.url}/connect/google?callback="http://localhost:4200/auth"`;
+    window.location.href = `${environment.url}/connect/google`;
+  }
+
+  facebookAuth(){
+    window.location.href = `${environment.url}/connect/facebook`;
   }
 
   googleAuthCallback(params: Params): Observable<any>{
     const opts = { params: new HttpParams({fromObject: params}) }
     return this.http.get(`${environment.url}/auth/google/callback`,opts)
+  }
+
+  facebookAuthCallback(params: Params): Observable<any>{
+    console.log('callback')
+    const opts = { params: new HttpParams({fromObject: params}) }
+    return this.http.get(`${environment.url}/auth/facebook/callback`,opts)
   }
 
   registerRestaurant({place, email, password}){
@@ -86,6 +98,20 @@ export class AuthService {
     },
     error => {
       // Handle error.
+      this.didFail.next(true);
+      console.log('An error occurred:', error.response);
+    })
+  }
+
+  restaurantLogin({email: identifier, password}: {email: string, password: string}){
+    this.http.post(`${environment.url}/auth/local`, {identifier, password})
+    .subscribe(({user, jwt}: any)=>{
+      this.saveUserData(user.id, jwt);
+      this.currentUser = user;
+    },
+    error => {
+      // Handle error.
+      this.didFail.next(true);
       console.log('An error occurred:', error.response);
     })
   }

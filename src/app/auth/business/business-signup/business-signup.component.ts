@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -11,17 +11,21 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-business-signup',
   templateUrl: './business-signup.component.html',
   styleUrls: ['./business-signup.component.scss'],
 })
-export class BusinessSignupComponent implements OnInit {
+
+export class BusinessSignupComponent implements OnInit, OnDestroy {
 
   confirmUser = false;
   isBusinessConfirmed = false;
-  didFail = false;
+  didFail: boolean;
+  didFail$: Subscription;
   isLoading = false;
   usrForm: FormGroup;
   bsnForm: FormGroup;
@@ -85,10 +89,17 @@ export class BusinessSignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.didFail$ = this.authService.didFail.pipe(
+      distinctUntilChanged()
+    )
+    .subscribe((value)=>{
+      this.didFail = value
+    })
+
     this.usrForm = this.fb.group(
       {
         email: ['', Validators.email],
-        password: ['', Validators.required],
+        password: ['', Validators.compose([Validators.required,Validators.minLength(8)])],
         confirmPassword: ['', Validators.required],
       },
       { validator: this.passwordConfirming }
@@ -137,6 +148,10 @@ export class BusinessSignupComponent implements OnInit {
   modifyBusiness() {
     this.bsnForm.reset();
     this.bsnForm.controls.place.enable();
+  }
+
+  ngOnDestroy(): void {
+    this.didFail$.unsubscribe();
   }
 }
 
