@@ -18,6 +18,7 @@ import {
   styleUrls: ['./business-signup.component.scss'],
 })
 export class BusinessSignupComponent implements OnInit {
+
   confirmUser = false;
   isBusinessConfirmed = false;
   didFail = false;
@@ -123,7 +124,6 @@ export class BusinessSignupComponent implements OnInit {
       email: userValues.email,
       password: userValues.password,
     };
-    console.log(formValues);
     this.authService.registerRestaurant(formValues);
   }
 
