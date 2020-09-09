@@ -3,6 +3,7 @@ import {GC_AUTH_TOKEN, GC_USER_ID} from './constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Params } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 // 1
 @Injectable({
@@ -17,8 +18,9 @@ export class AuthService {
 
   public jwt: BehaviorSubject<string> = new BehaviorSubject(null);
 
-  // 3
   private _isAuthenticated = new BehaviorSubject(false);
+
+  public didFail: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {
   }
@@ -47,6 +49,7 @@ export class AuthService {
     this.userId = id;
     this.jwt.next(jwt);
     this._isAuthenticated.next(true);
+    this.didFail.next(false);
   }
 
   // 7
@@ -69,25 +72,46 @@ export class AuthService {
   }
 
   googleAuth(){
-    window.location.href = 'http://localhost:1337/connect/google?callback="http://localhost:4200/auth"';
+    window.location.href = `${environment.url}/connect/google`;
+  }
+
+  facebookAuth(){
+    window.location.href = `${environment.url}/connect/facebook`;
   }
 
   googleAuthCallback(params: Params): Observable<any>{
     const opts = { params: new HttpParams({fromObject: params}) }
-    return this.http.get('http://localhost:1337/auth/google/callback',opts)
+    return this.http.get(`${environment.url}/auth/google/callback`,opts)
   }
 
-  registerRestaurant({place, username, email, password}){
-    
-    this.http.post('http://localhost:1337/auth/local/register', {place, username, email, password})
-    .subscribe((response:any) => {
-    // Handle success.
-    console.log('Well done!',response);
-    // console.log('User profile', response.data.user);
-    // console.log('User token', response.data.jwt);
+  facebookAuthCallback(params: Params): Observable<any>{
+    console.log('callback')
+    const opts = { params: new HttpParams({fromObject: params}) }
+    return this.http.get(`${environment.url}/auth/facebook/callback`,opts)
+  }
+
+  registerRestaurant({place, email, password}){
+    this.http.post(`${environment.url}/auth/local/register`, {place, email, password})
+    .subscribe(({user, jwt}:any) => {
+      this.saveUserData(user.id, jwt);
+      this.currentUser = user;
     },
     error => {
       // Handle error.
+      this.didFail.next(true);
+      console.log('An error occurred:', error.response);
+    })
+  }
+
+  restaurantLogin({email: identifier, password}: {email: string, password: string}){
+    this.http.post(`${environment.url}/auth/local`, {identifier, password})
+    .subscribe(({user, jwt}: any)=>{
+      this.saveUserData(user.id, jwt);
+      this.currentUser = user;
+    },
+    error => {
+      // Handle error.
+      this.didFail.next(true);
       console.log('An error occurred:', error.response);
     })
   }
