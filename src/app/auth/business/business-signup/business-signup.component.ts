@@ -19,9 +19,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './business-signup.component.html',
   styleUrls: ['./business-signup.component.scss'],
 })
-
 export class BusinessSignupComponent implements OnInit, OnDestroy {
-
   confirmUser = false;
   isBusinessConfirmed = false;
   didFail: boolean;
@@ -61,7 +59,7 @@ export class BusinessSignupComponent implements OnInit, OnDestroy {
       if (result) {
         this.bsnForm.controls.place.disable();
         this.setBusinessFormValues(place);
-        return
+        return;
       }
       this.modifyBusiness();
     });
@@ -89,17 +87,19 @@ export class BusinessSignupComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.didFail$ = this.authService.didFail.pipe(
-      distinctUntilChanged()
-    )
-    .subscribe((value)=>{
-      this.didFail = value
-    })
+    this.didFail$ = this.authService.didFail
+      .pipe(distinctUntilChanged())
+      .subscribe((value) => {
+        this.didFail = value;
+      });
 
     this.usrForm = this.fb.group(
       {
         email: ['', Validators.email],
-        password: ['', Validators.compose([Validators.required,Validators.minLength(8)])],
+        password: [
+          '',
+          Validators.compose([Validators.required, Validators.minLength(8)]),
+        ],
         confirmPassword: ['', Validators.required],
       },
       { validator: this.passwordConfirming }
