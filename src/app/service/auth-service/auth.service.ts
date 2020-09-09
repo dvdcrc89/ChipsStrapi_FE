@@ -66,9 +66,24 @@ export class AuthService {
   autoLogin() {
     const id = localStorage.getItem(GC_USER_ID);
     const jwt = localStorage.getItem(GC_AUTH_TOKEN);
-    if (id) {
-      this.setUserData(id, jwt);
+    if (id && jwt) {
+      this.getProfile(jwt)
+      .subscribe(user => {
+        console.log("ME",user);
+        this._user.next(user);
+        this.setUserData(id, jwt);
+      },
+      (err)=>{
+        console.log(err);
+        this.didFail.next(true);
+        this.logout();
+      })
+      
     }
+  }
+
+  getProfile(jwt: string){
+    return this.http.get(`${environment.url}/users/me`, {headers: {'Authorization': `Bearer ${jwt}`}});
   }
 
   googleAuth(){
