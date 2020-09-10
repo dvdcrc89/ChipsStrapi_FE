@@ -1,0 +1,9 @@
+<div class="soft-pagination">
+    <ul class="soft-pagination-items">
+      <li 
+        *ngFor="let x of totalPagesArray"
+        [ngClass]="{'active' : currentPage === x+1}"
+        (click)="changePage(x+1)"
+        >{{x+1}}</li>
+    </ul>
+</div>

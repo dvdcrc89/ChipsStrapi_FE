@@ -1,3 +1,6 @@
-<jobs-list [jobsList]="jobsList$ | async">
-    
-    
+<jobs-list 
+[jobsList]    = "jobsList$ | async"
+[itemPerPage] = "itemPerPage"
+[currentPage] = "currentPage"
+(pageEmitter) = "changePage($event)"
+></jobs-list>

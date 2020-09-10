@@ -1,11 +1,17 @@
-<section>
+<section *ngIf="jobsList && !jobsList.loading">
     <div class="jobs_map_grid">
-        <div class="wrapper job_cards_grid2" *ngIf="jobsList && !jobsList.loading" >
+        <div class="wrapper job_cards_grid2">
             <jobcard 
                 *ngFor="let job of jobsList.data.jobs"        
                 [job]="job">
             </jobcard>
         </div>
+        <job-paginator
+            [totalItems]   = "jobsList.data.jobsConnection.aggregate.count"
+            [itemPerPage]  = "itemPerPage"
+            [currentPage]  = "currentPage"
+            (pageEmitter)  = "changePage($event)"
+        ></job-paginator>       
     </div>
 </section>
 

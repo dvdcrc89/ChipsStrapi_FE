@@ -9,8 +9,8 @@ import { ApolloQueryResult } from 'apollo-client';
 
 const JOBS_QUERY = (): DocumentNode => {
   return gql`
-  query Jobs {
-      jobs {
+  query Jobs($limit:Int, $start: Int) {
+      jobs(limit: $limit, start: $start) {
         Type,
         UID,
         description,
@@ -29,6 +29,11 @@ const JOBS_QUERY = (): DocumentNode => {
             EndAt
           }
         }
+      },
+      jobsConnection {
+        aggregate {
+          count
+        }
       }
     } 
   `
@@ -44,6 +49,12 @@ export class JobsComponent implements OnInit {
 
   jobsList$: Observable<ApolloQueryResult<any>>
 
+  cursor: number = 0;
+
+  currentPage: number = 1;
+
+  itemPerPage: number = 2;
+
   constructor(
     private authService: AuthService, 
     private apollo: Apollo,
@@ -57,13 +68,23 @@ export class JobsComponent implements OnInit {
     .subscribe(()=>{
       this.jobsList$ = this.runProfileQuery();
     });
-
+ 
   }
 
+  changePage(page: number){
+    this.cursor = (page-1)*this.itemPerPage;
+    this.currentPage = page;
+    this.jobsList$ = this.runProfileQuery();
+  }
+ 
   private runProfileQuery() {
     return this.apollo
             .watchQuery<any>({
-              query: JOBS_QUERY()
+              query: JOBS_QUERY(),
+              variables:{
+                limit: this.itemPerPage,
+                start: this.cursor
+              }
             }).valueChanges;
    }
 }

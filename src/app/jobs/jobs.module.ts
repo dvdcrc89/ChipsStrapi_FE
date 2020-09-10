@@ -8,10 +8,11 @@ import { JobsListComponent } from './UI/jobs-list/jobs-list.component';
 import { JobMapComponent } from './UI/job-map/job-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
+import { JobPaginatorComponent } from './UI/job-paginator/job-paginator.component';
 
 
 @NgModule({
-  declarations: [JobsComponent, JobcardComponent, JobsListComponent, JobMapComponent],
+  declarations: [JobsComponent, JobcardComponent, JobsListComponent, JobMapComponent, JobPaginatorComponent],
   imports: [
     CommonModule,
     JobsRoutingModule,
