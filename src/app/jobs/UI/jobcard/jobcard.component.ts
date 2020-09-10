@@ -1,26 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Jobs } from 'src/types/schema';
 
-export interface IJob {
-  Type: string,
-  UID: string,
-  description: string,
-  payPerHour: number,
-  position: string,
-  restaurant: {
-    name: string,
-    latitude: number,
-    longitude: number,
-    address: string,
-    
-  }
-  shift_date: {
-    date: {
-      Date: string,
-      StartAt: string,
-      EndAt: string
-    }[]
-  }
-}
+
 @Component({
   selector: 'jobcard',
   templateUrl: './jobcard.component.html',
@@ -29,7 +10,7 @@ export interface IJob {
 export class JobcardComponent implements OnInit {
 
   @Input()
-  job: IJob;
+  job: Jobs;
    
   constructor() { }
 

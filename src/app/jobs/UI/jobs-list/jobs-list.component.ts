@@ -1,15 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IJob } from '../jobcard/jobcard.component';
+import { JobsWithCount } from '../../jobs.component';
 
 export interface IGraphQLJobsList {
-  data: { 
-      jobs: IJob[],
-      jobsConnection: {
-        aggregate: {
-          count: number
-        }
-      }
-    },
+  data: JobsWithCount,
   loading: boolean,
   networkStatus: number,
   stale: boolean
@@ -37,6 +30,7 @@ export class JobsListComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   changePage(page: number){

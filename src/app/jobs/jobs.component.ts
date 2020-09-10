@@ -6,6 +6,7 @@ import gql from 'graphql-tag';
 import { filter, switchMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApolloQueryResult } from 'apollo-client';
+import { Jobs, JobsConnection } from 'src/types/schema';
 
 const JOBS_QUERY = (): DocumentNode => {
   return gql`
@@ -39,6 +40,10 @@ const JOBS_QUERY = (): DocumentNode => {
   `
 } 
 
+export type JobsWithCount = {
+  jobs: Array<Jobs>,
+  jobsConnection: JobsConnection
+}
 
 @Component({
   selector: 'app-jobs',
@@ -79,7 +84,7 @@ export class JobsComponent implements OnInit {
  
   private runProfileQuery() {
     return this.apollo
-            .watchQuery<any>({
+            .watchQuery<JobsWithCount>({
               query: JOBS_QUERY(),
               variables:{
                 limit: this.itemPerPage,

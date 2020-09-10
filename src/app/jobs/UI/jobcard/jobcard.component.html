@@ -9,7 +9,7 @@
           <div class="job_description">
            {{job.description}}
           </div>
-          <p>Pay: {{job.payPerHour}}</p>
+          <p class="pay">Pay: {{job.payPerHour}}£/h</p>
             <div class="shift-dates">
                 <h4>Shift Dates:</h4>
                 <div class="shift-date" *ngFor="let date of job.shift_date.date">

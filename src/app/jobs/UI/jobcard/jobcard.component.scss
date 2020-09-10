@@ -12,6 +12,8 @@
 .title{
     font-size: 3rem;
     color: forestgreen;
+    border-bottom: 3px solid chartreuse;
+    margin: 0 0 1rem 0;
 }
 
 .job-position{
@@ -25,4 +27,31 @@
 
 .job_map{
     justify-self: self-end;
+}
+.shift-date {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid yellowgreen;
+    padding: 0.5rem;
+    margin: 0 0 0.4rem 0;
+    font-weight: bold;
+    color: #4d4d4d;
+}
+
+.job_description{
+    padding: 0.5rem;
+    margin: 1rem;
+    border: 1px solid goldenrod;
+}
+
+.job_map{
+    width: 88%;
+    height: 100%;
+    background:gold;
+}
+
+.pay{
+    font-size: 1.5rem;
+    color: blueviolet;
+    font-weight: bolder;
 }
