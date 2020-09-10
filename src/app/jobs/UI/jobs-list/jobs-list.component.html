@@ -1,0 +1,11 @@
+<section>
+    <div class="jobs_map_grid">
+        <div class="wrapper job_cards_grid2" *ngIf="jobsList && !jobsList.loading" >
+            <jobcard 
+                *ngFor="let job of jobsList.data.jobs"        
+                [job]="job">
+            </jobcard>
+        </div>
+    </div>
+</section>
+

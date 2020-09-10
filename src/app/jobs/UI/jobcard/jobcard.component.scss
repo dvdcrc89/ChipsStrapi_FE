@@ -1,0 +1,28 @@
+.job_card{
+    -webkit-box-shadow: 0 0 5px 0 #ccc;
+    -moz-box-shadow: 0 0 5px 0 #ccc;
+    box-shadow: 0 0 5px 0 #ccc;
+    border-radius: 4px;
+    margin-top: 12px;
+    padding: 12px 12px 19px 12px;
+    background-color: #fff;
+    
+}
+
+.title{
+    font-size: 3rem;
+    color: forestgreen;
+}
+
+.job-position{
+    font-size: 1.5rem;
+    color: fuchsia;
+}
+.job_card{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.job_map{
+    justify-self: self-end;
+}
