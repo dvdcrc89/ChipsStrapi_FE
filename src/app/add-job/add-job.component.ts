@@ -10,7 +10,6 @@ import { Observable }         from 'rxjs';
 import { Restaurant, BusinessUser, CreateShiftDatePayload } from 'src/types/schema';
 import * as moment            from 'moment';
 import gql                    from 'graphql-tag';
-import { UserInfo } from 'os';
 
 export type ShiftDateGroup = {
   Date:     (string | ((control: AbstractControl) => ValidationErrors))[],
