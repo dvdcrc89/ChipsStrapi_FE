@@ -72,7 +72,7 @@ export class AddJobComponent implements OnInit {
   
   addForm: FormGroup;
   values: Jobs;
-  didFail: boolean;
+  didFail: boolean = false;
   loading: boolean;
   private restaurant: Restaurant;
 
@@ -117,7 +117,6 @@ export class AddJobComponent implements OnInit {
       this.loading = false;
       this.restaurant = result.data.businessUser.restaurant;
       this.initForm(this.restaurant.id);
-      this.didFail = true;
     },
     (err)=>{
       console.log(err);
