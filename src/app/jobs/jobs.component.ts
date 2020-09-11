@@ -58,7 +58,7 @@ export class JobsComponent implements OnInit {
 
   currentPage: number = 1;
 
-  itemPerPage: number = 2;
+  itemPerPage: number = 4;
 
   constructor(
     private authService: AuthService, 
@@ -81,7 +81,7 @@ export class JobsComponent implements OnInit {
     this.currentPage = page;
     this.jobsList$ = this.runProfileQuery();
   }
- 
+
   private runProfileQuery() {
     return this.apollo
             .watchQuery<JobsWithCount>({
