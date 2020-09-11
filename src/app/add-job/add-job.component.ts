@@ -9,6 +9,18 @@ import { filter, switchMap } from 'rxjs/operators';
 import { ApolloQueryResult } from 'apollo-client';
 import * as moment from 'moment';
 
+
+/** 
+ * TO DO
+ * Move logic inside service ?
+ * Divide Shift Dates in his own component
+ * Create backend resolver to handle both query in one go
+ * Better handle validation
+ * - Date is in the future
+ * - StartAt is lower than EndAt (allow EndAt lower then StartAt for night shift, but show warning)
+ * - Merge Type and Position in one select
+ * 
+*/
 const PROFILE_QUERY = (id: number): DocumentNode =>{
   return gql`
   query BusinessUser {
@@ -21,14 +33,7 @@ const PROFILE_QUERY = (id: number): DocumentNode =>{
   } 
 `
 } 
-// $Type: String, $restaurant: ID!, $shift_date: [ShiftDateInput], $description: String, $payPerHour:String, $position: String 
-//Type: $Type, 
-// restaurant: $restaurant, 
-// shift_date: $shift_date, 
-// description: $description, 
-// payPerHour:$payPerHour, 
-// position: $position
-let a: JobInput
+
 const JOB_MUTATION = gql`
     mutation CreateJob($job: JobInput) {
       createJob(input: { data: $job }) {
