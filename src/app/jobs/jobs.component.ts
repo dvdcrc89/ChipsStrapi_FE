@@ -14,6 +14,7 @@ const JOBS_QUERY = (): DocumentNode => {
       jobs(limit: $limit, start: $start) {
         Type,
         UID,
+        id,
         description,
         payPerHour,
         position,
@@ -71,7 +72,7 @@ export class JobsComponent implements OnInit {
       filter(user => user),
     )
     .subscribe(()=>{
-      this.jobsList$ = this.runProfileQuery();
+      this.jobsList$ = this.runJobsQuery();
     });
  
   }
@@ -79,10 +80,10 @@ export class JobsComponent implements OnInit {
   changePage(page: number){
     this.cursor = (page-1)*this.itemPerPage;
     this.currentPage = page;
-    this.jobsList$ = this.runProfileQuery();
+    this.jobsList$ = this.runJobsQuery();
   }
 
-  private runProfileQuery() {
+  private runJobsQuery() {
     return this.apollo
             .watchQuery<JobsWithCount>({
               query: JOBS_QUERY(),

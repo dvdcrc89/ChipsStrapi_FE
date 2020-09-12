@@ -18,6 +18,17 @@ const PROFILE_QUERY = (id: number): DocumentNode =>{
         address,
         latitude,
         longitude,
+        jobs {
+          id,
+          Type,
+          shift_date{
+            date{
+              Date,
+              StartAt,
+              EndAt
+            }
+          }
+        }
       }
     }
   } 
