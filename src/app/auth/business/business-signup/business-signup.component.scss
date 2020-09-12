@@ -42,6 +42,11 @@ form {
 	font-weight: lighter;
 	text-align: center;
 }
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .alert {
 	width: 100%;
 	font-size: 0.7rem;
@@ -72,4 +77,11 @@ form {
 
 .bsn {
   width: 100%;
+  position: relative;
+}
+
+.edit-business {
+  position: absolute;
+  right: 0;
+  top: 0px;
 }

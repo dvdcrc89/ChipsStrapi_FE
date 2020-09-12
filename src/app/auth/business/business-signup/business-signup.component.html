@@ -5,9 +5,10 @@
       <form [formGroup]="bsnForm" class="bsn">
         <mat-form-field class="input-full-width">
           <input ngx-google-places-autocomplete matInput [options]="options" #placesRef="ngx-places"
-            formControlName="place" (onAddressChange)="handleAddressChange($event)" (input)="placeSelected = false"
+            formControlName="place" (onAddressChange)="openDialog($event)" (input)="placeSelected = false"
             placeholder="Search for your business" id="place" name="place">
         </mat-form-field>
+        <button class="edit-business" mat-icon-button (click)="modifyBusiness()"><mat-icon>edit</mat-icon></button>
       </form>
       <mat-form-field class="input-full-width">
         <input matInput id="email" type="email" name="email" placeholder="Email" formControlName="email">

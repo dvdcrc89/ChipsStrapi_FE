@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'home', component: EeLandingPageComponent },
   { path: 'business', component: ErLandingPageComponent },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
+  { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
 ];
 
 @NgModule({
