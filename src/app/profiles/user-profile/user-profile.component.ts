@@ -27,9 +27,9 @@ const PROFILE_QUERY = (id: number): DocumentNode =>{
         }
       }
     }
-  } 
+  }
 `
-} 
+}
 
 @Component({
   selector: 'app-user-profile',
@@ -38,10 +38,10 @@ const PROFILE_QUERY = (id: number): DocumentNode =>{
 })
 export class UserProfileComponent implements OnInit {
 
-  userProfile$: Observable<ApolloQueryResult<any>>
+  personalUser$: Observable<ApolloQueryResult<any>>
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private apollo: Apollo,
     private router: Router) {}
 
@@ -54,13 +54,12 @@ export class UserProfileComponent implements OnInit {
         console.log(user);
         const { basic_user, business_user } = user;
         if(!basic_user) {
-          business_user  
+          business_user
             ? this.router.navigate(['/profile/business'])
             : this.router.navigate(['/'])
         } else {
-          this.userProfile$ = this.runProfileQuery(basic_user);
+          this.personalUser$ = this.runProfileQuery(basic_user);
         }
-        
       }
     )
   }

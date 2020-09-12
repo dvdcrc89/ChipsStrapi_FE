@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-export interface IMe {
+export interface PersonalUser {
   basicUser: {
     profile: {
       name:         string,
@@ -16,17 +16,16 @@ export interface IMe {
 }
 
 @Component({
-  selector: 'app-user-profile-ui',
-  templateUrl: './user-profile-ui.component.html',
-  styleUrls: ['./user-profile-ui.component.scss']
+  selector: 'app-personal-user-profile-component',
+  templateUrl: './personal-user-profile-component.html',
+  styleUrls: ['./personal-user-profile-component.scss']
 })
-export class UserProfileUIComponent implements OnInit {
+
+export class PersonalUserProfileUIComponent implements OnInit {
   @Input()
-  me: IMe;
+  personalUser: PersonalUser;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

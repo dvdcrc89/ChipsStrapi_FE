@@ -20,21 +20,21 @@ const PROFILE_QUERY = (id: number): DocumentNode =>{
         longitude,
       }
     }
-  } 
+  }
 `
-} 
+}
 
 @Component({
-  selector: 'app-business',
-  templateUrl: './business.component.html',
-  styleUrls: ['./business.component.scss']
+  selector: 'app-business-user-profile',
+  templateUrl: './business-profile.component.html',
+  styleUrls: ['./business-profile.component.scss']
 })
-export class BusinessComponent implements OnInit {
+export class BusinessProfileComponent implements OnInit {
 
   businessProfile$: Observable<ApolloQueryResult<any>>
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private apollo: Apollo,
     private router: Router) {}
 
@@ -49,7 +49,7 @@ export class BusinessComponent implements OnInit {
           this.router.navigate(['/profile/me'])
         } else {
           this.businessProfile$ = this.runProfileQuery(business_user);
-        } 
+        }
       }
     )
   }

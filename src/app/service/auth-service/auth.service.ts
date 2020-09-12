@@ -78,7 +78,6 @@ export class AuthService {
         this.didFail.next(true);
         this.logout();
       })
-      
     }
   }
 

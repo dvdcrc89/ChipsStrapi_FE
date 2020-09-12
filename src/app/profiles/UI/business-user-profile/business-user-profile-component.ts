@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-export interface IBusinessUser {
+export interface BusinessUser {
   business_user: {
     restaurant: {
       name: string,
@@ -13,14 +13,13 @@ export interface IBusinessUser {
 }
 
 @Component({
-  selector: 'app-restaurant',
-  templateUrl: './restaurant.component.html',
-  styleUrls: ['./restaurant.component.scss']
+  selector: 'app-business-user-profile-component',
+  templateUrl: './business-user-profile-component.html',
+  styleUrls: ['./business-user-profile-component.scss']
 })
-
-export class RestaurantComponent implements OnInit {
+export class BusinessUserProfileUIComponent implements OnInit {
   @Input()
-  businessUser: IBusinessUser;
+  businessProfile: BusinessUser;
 
   constructor() { }
 

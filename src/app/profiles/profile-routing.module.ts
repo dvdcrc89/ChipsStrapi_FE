@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ProfileComponent } from './profile.component';
-import { BusinessComponent } from './business/business.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BusinessProfileComponent } from './business-profile/business-profile.component';
 
 const routes: Routes = [
-  { path: '', component: ProfileComponent },
-  { path: 'business', component: BusinessComponent },
-  { path: 'me', component: UserProfileComponent },
-
-  
+  { path: 'business', component: BusinessProfileComponent },
+  { path: 'personal', component: UserProfileComponent },
 ];
 
 @NgModule({
