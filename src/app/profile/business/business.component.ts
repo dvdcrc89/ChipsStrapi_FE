@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApolloQueryResult } from 'apollo-client';
 
-const PROFILE_QUERY = (id: number): DocumentNode =>{
+const PROFILE_QUERY = (id: string): DocumentNode =>{
   return gql`
   query BusinessUser {
     businessUser(id:${id}) {
@@ -51,7 +51,7 @@ export class BusinessComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService._user.pipe(
-      filter(user => user),
+      filter(user => !!user),
     )
     .subscribe(
       (user) => {
@@ -65,7 +65,7 @@ export class BusinessComponent implements OnInit {
     )
   }
 
-  private runProfileQuery(id: number) {
+  private runProfileQuery(id: string) {
     return this.apollo
             .watchQuery<any>({
               query: PROFILE_QUERY(id)

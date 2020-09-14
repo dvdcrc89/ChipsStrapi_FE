@@ -31,7 +31,7 @@ export type CreateShiftDateWithPayload = {
  * - Merge Type and Position in one select
  * 
 */
-const PROFILE_QUERY = (id: number): DocumentNode =>{
+const PROFILE_QUERY = (id: string): DocumentNode =>{
   return gql`
   query BusinessUser {
     businessUser(id:${id}) {
@@ -130,8 +130,8 @@ export class AddJobComponent implements OnInit {
     this.loading = true;
     this.authService._user
     .pipe(
-      filter(user => user),
-      switchMap(({ business_user } : { business_user: number }) =>{
+      filter(user => !!user),
+      switchMap(({ business_user }) =>{
         if(!business_user){
           throw new Error('You cant add jobs, Please sign as bussiness')
         }
@@ -187,7 +187,7 @@ export class AddJobComponent implements OnInit {
    * @param id 
    * @returns query 
    */
-  private runQuery(id: number)
+  private runQuery(id: string)
     : Observable<ApolloQueryResult<{businessUser: BusinessUser}>> {
     
     return this.apollo

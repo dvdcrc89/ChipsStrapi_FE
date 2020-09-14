@@ -16,11 +16,10 @@ import { MatInputModule } from '@angular/material/input';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
 @NgModule({
   declarations: [
     AppComponent,
-    AddJobComponent
+    AddJobComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -42,6 +41,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
   ],
   providers: [AuthService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},],
+ 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

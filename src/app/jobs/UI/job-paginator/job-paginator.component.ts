@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -8,31 +9,42 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class JobPaginatorComponent implements OnInit {
   @Input()
-  totalItems: number;
+  public totalItems$: Observable<number>;
   
   @Input()
-  itemPerPage: number;
+  public itemPerPage: number;
   
   @Input()
-  currentPage: number;
+  public currentPage: number;
   
   @Output()
-  pageEmitter: EventEmitter<number> = new EventEmitter();
+  public pageEmitter: EventEmitter<number> = new EventEmitter();
 
-  totalPages: number
+  public totalPages: number
   
-  totalPagesArray: number[];
+  public totalPagesArray: number[];
+
+  public totalItems_sub$: Subscription;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.totalPages = Math.ceil(this.totalItems / this.itemPerPage);
-    this.totalPagesArray = [...Array(this.totalPages).keys()]
-    console.log(this.totalPages,this.totalPagesArray,this.totalItems,this.itemPerPage);
+    this.totalItems_sub$ = this.totalItems$.subscribe(
+      totalItems => {
+        console.log(totalItems);
+        this.totalPages = Math.ceil(totalItems / this.itemPerPage);
+        this.totalPagesArray = [...Array(this.totalPages).keys()]
+      }
+    )
+    
   }
 
   changePage(page: number){
     this.currentPage = page;
     this.pageEmitter.emit(page);
+  }
+
+  ngOnDestroy(): void {
+   this.totalItems_sub$.unsubscribe(); 
   }
 }

@@ -19,8 +19,8 @@
                     <span class="blue">End at: {{date.Date+'T'+date.EndAt | date:'shortTime'}}  </span>
                 </div>
             </div>
-            <button *ngIf="!(applied | async)" (click)="toggleJob(true)"> APPLY </button>
-            <button *ngIf="(applied | async)" (click)="toggleJob(false)"> DISAPPLY </button>
+            <button *ngIf="!applied" (click)="toggleJob()"> APPLY </button>
+            <button *ngIf="applied" (click)="toggleJob()"> DISAPPLY </button>
         </div>
       
         </div>
