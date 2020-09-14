@@ -1,0 +1,93 @@
+@import '../../_variables.scss';
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4em;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+h2 {
+  font-family: 'Hind Madurai', sans-serif;
+  font-weight: normal;
+  font-size: 2em;
+  margin: 0px;
+}
+
+h3 {
+  font-family: 'Hind Madurai', sans-serif;
+  font-weight: lighter;
+  letter-spacing: 3px;
+}
+
+.hero-img {
+  background-color: aquamarine;
+  height: $hero-height;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
+.app {
+  width: 500px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.card {
+  width: 300px;
+  height: 350px;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: $hero-height;
+  margin-bottom: 100px;
+
+  div:last-child {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.card-section {
+  margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+@media all and (max-width: 480px) {
+  .hero-content {
+    display: block;
+    height: auto;
+    margin-bottom: 0px;
+
+    div:last-child {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .card-section {
+    margin-top: 0px;
+  }
+
+  .card-section {
+    justify-content: center;
+    text-align: center;
+  }
+
+}

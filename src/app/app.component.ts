@@ -5,6 +5,9 @@ import { distinctUntilChanged, switchMap, filter } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 
+import * as AOS from 'aos';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,6 +20,8 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService, private apollo: Apollo){}
 
   ngOnInit() {
+    AOS.init();
+
     this.authService.autoLogin();
     this.authService.isAuthenticated.pipe(
       distinctUntilChanged()
@@ -25,7 +30,6 @@ export class AppComponent implements OnInit {
         console.log(`Authenticated: ${isAuthenticated} `)
         this.isAuthenticated = isAuthenticated
     });
-    
   }
 
 

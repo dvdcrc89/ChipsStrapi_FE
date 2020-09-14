@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
-import { EeLandingPageComponent } from './pages/ee-landing-page/ee-landing-page.component';
-import { ErLandingPageComponent } from './pages/er-landing-page/er-landing-page.component';
+import { PersonalLandingPageComponent } from './pages/personal-landing-page/personal-landing-page.component';
+import { BusinessLandingPageComponent } from './pages/business-landing-page/business-landing-page.component';
 
 
 const routes: Routes = [
-  { path: 'home', component: EeLandingPageComponent },
-  { path: 'business', component: ErLandingPageComponent },
+  { path: 'personal', component: PersonalLandingPageComponent },
+  { path: 'business', component: BusinessLandingPageComponent },
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
   { path: 'profile', loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule) },
 ];
