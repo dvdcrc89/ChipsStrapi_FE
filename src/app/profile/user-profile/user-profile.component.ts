@@ -8,7 +8,7 @@ import { filter } from 'rxjs/operators';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
 
-const PROFILE_QUERY = (id: number): DocumentNode =>{
+const PROFILE_QUERY = (id: string): DocumentNode =>{
   return gql`
   query BasicUsers {
     basicUser(id:${id}) {
@@ -47,7 +47,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService._user.pipe(
-      filter(user => user),
+      filter(user => !!user),
     )
     .subscribe(
       (user) => {
@@ -65,7 +65,7 @@ export class UserProfileComponent implements OnInit {
     )
   }
 
-  private runProfileQuery(id: number) {
+  private runProfileQuery(id: string) {
     return this.apollo
             .watchQuery<any>({
               query: PROFILE_QUERY(id)

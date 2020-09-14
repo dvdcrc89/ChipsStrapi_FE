@@ -23,7 +23,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     MatIconModule,
     CommonModule,
     AuthRoutingModule,
-    FormsModule,
     MatInputModule,
     MatButtonModule,
     MatDialogModule,

@@ -2,8 +2,17 @@ import {Injectable} from '@angular/core';
 import {GC_AUTH_TOKEN, GC_USER_ID} from './constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Params } from '@angular/router';
+import { Params, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { Maybe, UsersPermissionsUser } from 'src/types/schema';
+
+export type User = {
+  username?: string,
+  email: string,
+  name?: string,
+  basic_user?: string,
+  business_user?:string,
+}
 
 // 1
 @Injectable({
@@ -14,7 +23,7 @@ export class AuthService {
   // 2
   private userId: string = null;
 
-  public _user = new BehaviorSubject(null);
+  public _user: BehaviorSubject<Maybe<User>> = new BehaviorSubject(null);
 
   public jwt: BehaviorSubject<string> = new BehaviorSubject(null);
 
@@ -22,7 +31,7 @@ export class AuthService {
 
   public didFail: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   // 4
@@ -30,11 +39,13 @@ export class AuthService {
     return this._isAuthenticated;
   }
 
-  set currentUser(user: any) {
+  set currentUser(user: Maybe<User>) {
+    console.log(user);
+    //@ts-ignore 
     this._user.next(user);
   }
 
-  get user(): Observable<any> { return this._user.asObservable() }
+  get user(): BehaviorSubject<Maybe<User>>  { return this._user }
 
   // 5
   saveUserData(id: string, token: string) {
@@ -57,7 +68,7 @@ export class AuthService {
     localStorage.removeItem(GC_USER_ID);
     localStorage.removeItem(GC_AUTH_TOKEN);
     this.userId = null;
-    this._user.next(null);
+    this.currentUser = null;
     this.jwt.next(null)
     this._isAuthenticated.next(false);
   }
@@ -68,9 +79,13 @@ export class AuthService {
     const jwt = localStorage.getItem(GC_AUTH_TOKEN);
     if (id && jwt) {
       this.getProfile(jwt)
-      .subscribe(user => {
-        console.log("ME",user);
-        this._user.next(user);
+      .subscribe((user: Maybe<User>,...rest) => {
+        console.log(user);
+        if(!user) {
+          throw new Error('User not found');
+        }
+        
+        this.currentUser = user;
         this.setUserData(id, jwt);
       },
       (err)=>{
@@ -123,6 +138,7 @@ export class AuthService {
     .subscribe(({user, jwt}: any)=>{
       this.saveUserData(user.id, jwt);
       this.currentUser = user;
+      this.router.navigate(['/profile/business']);
     },
     error => {
       // Handle error.

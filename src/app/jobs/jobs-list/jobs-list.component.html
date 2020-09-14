@@ -1,0 +1,20 @@
+<section *ngIf="totalJobs$">
+    <div class="jobs_map_grid">
+        <div class="wrapper job_cards_grid2">
+            <jobcard 
+                *ngFor          = "let job of jobs$ | async"        
+                [job]           = "job"
+                [applied]       = "jobsApplication[job.id]"
+                (toggleEmitter) = "applyToJob($event)"
+                >
+            </jobcard>
+        </div>
+        <job-paginator
+            [totalItems$]   = "totalJobs$"
+            [itemPerPage]  = "itemPerPage"
+            [currentPage]  = "currentPage"
+            (pageEmitter)  = "changePage($event)"
+        ></job-paginator>       
+    </div>
+</section>
+

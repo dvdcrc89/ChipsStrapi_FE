@@ -1,0 +1,36 @@
+<div class="job_card">
+    <div class ="card_content">
+      <div class="title">
+        <span>{{job.restaurant.name}}</span>
+      </div>
+      <span class="job-position">{{job.position}}</span>
+      <div class="card_footer">
+        <div class="job_info">
+          <div class="job_description">
+           {{job.description}}
+          </div>
+          <p class="pay">Pay: {{job.payPerHour}}£/h</p>
+            <div class="shift-dates">
+                <h4>Shift Dates:</h4>
+                <div class="shift-date" *ngFor="let date of job.shift_date.date">
+                    <span class="">Date: {{date.Date| date: 'dd/MM/yyyy'}}</span>
+                    <!-- Create custom pipe for time-->
+                    <span class="blue">Start at: {{date.Date+'T'+date.StartAt| date:'shortTime'}}</span>
+                    <span class="blue">End at: {{date.Date+'T'+date.EndAt | date:'shortTime'}}  </span>
+                </div>
+            </div>
+            <button *ngIf="!applied" (click)="toggleJob()"> APPLY </button>
+            <button *ngIf="applied" (click)="toggleJob()"> DISAPPLY </button>
+        </div>
+      
+        </div>
+      </div>
+      <div class="job_map">
+        <job-map
+        [latitude]="job.restaurant.latitude"
+        [longitude]="job.restaurant.longitude"
+        [title]="job.restaurant.name"
+        ></job-map>  
+    </div>
+
+  </div>

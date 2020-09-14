@@ -1,0 +1,49 @@
+<section *ngIf="!loading">
+    <div class="aligner">
+      <img class="logo" src="../../../../assets/logo_text.svg" />
+      <form class="example-form" (ngSubmit)="onSubmit()" [formGroup]="addForm">
+        <mat-form-field class="input-full-width">
+          <input matInput id="Type" type="text" name="Type" placeholder="Type" formControlName="Type">
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <input matInput id="position" type="text" name="position" placeholder="Position"
+            formControlName="position">
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+          <input matInput id="payPerHour" type="number" name="payPerHour"
+            placeholder="Pay Per Hour" formControlName="payPerHour">
+        </mat-form-field>
+        <mat-form-field class="input-full-width">
+            <textarea matInput id="description" type="text" name="description"
+              placeholder="Description" formControlName="description"></textarea>
+          </mat-form-field>
+        <p>Shift Dates:</p><button type='button' (click)="addShiftDate()">+</button>
+        <div class ="shift" *ngFor="let shift of shift_dates | keyvalue; let i = index" [formGroup]="shift_dates[i]">
+            <button type='button' (click)="remove(i)">X</button>
+            <mat-form-field class="input-full-width" appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker"  formControlName="Date" >
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div class="start_end">
+                <mat-form-field class="input-full-width">
+                    <input matInput id="StartAt" type="time" name="StartAt"
+                      placeholder="StartAt" formControlName="StartAt">
+                  </mat-form-field>
+                  <mat-form-field class="input-full-width">
+                    <input matInput id="EndAt" type="time" name="EndAt"
+                      placeholder="EndAt" formControlName="EndAt">
+                  </mat-form-field>
+            </div>
+        </div>
+
+        <button mat-raised-button type="submit"  [disabled]="addForm.invalid" >Add</button>
+      </form>
+      <div class="alert" *ngIf="didFail">
+        Ops.. Something went wrong
+      </div>
+    </div>
+  </section>
