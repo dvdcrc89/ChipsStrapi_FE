@@ -7,12 +7,15 @@ import { filter } from 'rxjs/internal/operators/filter';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApolloQueryResult } from 'apollo-client';
+import { STATUS } from 'src/app/class/UserWrapper';
 
 const PROFILE_QUERY = (id: string): DocumentNode =>{
   return gql`
   query BusinessUser {
     businessUser(id:${id}) {
+      id,
       restaurant {
+        id,
         name,
         website,
         address,
@@ -22,6 +25,7 @@ const PROFILE_QUERY = (id: string): DocumentNode =>{
           id,
           Type,
           shift_date{
+            id,
             date{
               Date,
               StartAt,
@@ -55,13 +59,13 @@ export class BusinessComponent implements OnInit {
     )
     .subscribe(
       (user) => {
-        const { business_user } = user;
-        if(!business_user) {
-          this.router.navigate(['/profile/me'])
-        } else {
-          this.businessProfile$ = this.runProfileQuery(business_user);
+        const { business_user, status } = user;
+          status === STATUS.BASIC_USER && this.router.navigate(['/profile/me'])
+          if(status === STATUS.BUSINESS_USER){
+            this.businessProfile$ = this.runProfileQuery(business_user);
+          }
         } 
-      }
+      
     )
   }
 

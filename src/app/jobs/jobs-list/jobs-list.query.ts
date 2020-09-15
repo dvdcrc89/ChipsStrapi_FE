@@ -11,12 +11,14 @@ export const JOBS_QUERY =
           payPerHour,
           position,
           restaurant {
+            id,
             name,
             address,
             latitude,
             longitude
           }
           shift_date{
+            id,
             date {
               Date,
               StartAt,
@@ -37,6 +39,7 @@ export const JOBS_QUERY =
         basicUser(id:$id) {
         id,
         job_applications {
+            id,
             job {
                 id
             }

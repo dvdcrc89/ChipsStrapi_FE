@@ -7,12 +7,15 @@ import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { DocumentNode } from 'graphql';
 import gql from 'graphql-tag';
+import { STATUS } from 'src/app/class/UserWrapper';
 
 const PROFILE_QUERY = (id: string): DocumentNode =>{
   return gql`
   query BasicUsers {
     basicUser(id:${id}) {
+      id,
       profile {
+        id,
         name,
         profileImage,
         coverImage,
@@ -21,7 +24,8 @@ const PROFILE_QUERY = (id: string): DocumentNode =>{
         cv,
         interests
       },
-      jobs_applications {
+      job_applications {
+        id,
         job {
           id
         }
@@ -51,15 +55,13 @@ export class UserProfileComponent implements OnInit {
     )
     .subscribe(
       (user) => {
-        console.log(user);
-        const { basic_user, business_user } = user;
-        if(!basic_user) {
-          business_user  
-            ? this.router.navigate(['/profile/business'])
-            : this.router.navigate(['/'])
-        } else {
-          this.userProfile$ = this.runProfileQuery(basic_user);
-        }
+        const { basic_user, status } = user;
+          console.log(status)
+          status === STATUS.BUSINESS_USER && this.router.navigate(['/profile/business'])
+          if(status === STATUS.BASIC_USER) {
+            this.userProfile$ = this.runProfileQuery(basic_user);
+          }
+        
         
       }
     )

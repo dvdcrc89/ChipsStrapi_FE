@@ -9,12 +9,13 @@ import { GC_AUTH_TOKEN } from './service/auth-service/constants';
 
 const uri = `${environment.url}/graphql`; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink) {
+  console.log("CREATE APOLLO")
   const token = localStorage.getItem(GC_AUTH_TOKEN);
   const auth = setContext((operation, context) => ({
     headers: {
-      Authorization: `Bearer ${token}`
+      Authorization: `Bearer ${localStorage.getItem(GC_AUTH_TOKEN)}`
     },
-  }));
+  }))
 
   const link = ApolloLink.from([auth, httpLink.create({ uri })]);
 

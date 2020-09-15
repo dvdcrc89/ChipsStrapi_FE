@@ -1,0 +1,11 @@
+.nav-link {
+	display: flex;
+	height: 100%;
+	align-items: center;
+	text-decoration: none;
+	color: #4A4A4A;
+	border-bottom: 1.5px transparent solid;
+	&:hover {
+		border-bottom: 1.5px #B400AE solid;
+	}
+}
