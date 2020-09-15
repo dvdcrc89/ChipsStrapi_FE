@@ -11,7 +11,7 @@ export interface IMe {
       cv:           string,
       interests:    string
     },
-    jobs_applications: Array<any>
+    job_applications: Array<any>
   }
 }
 

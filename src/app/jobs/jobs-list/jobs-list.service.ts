@@ -83,6 +83,7 @@ export class JobsListService {
               filter(user => !!user),
               switchMap(({basic_user}) =>{
                 if(basic_user){
+                  console.log(basic_user);
                   return this.runJobsApplicationQuery(basic_user)
                 }
                 return of({data: null})

@@ -1,0 +1,17 @@
+<nav *ngIf="visible" [ngClass]="{'business': userType === userTypes.BUSINESS_USER,'basic': userType === userTypes.BASIC_USER,'guest': userType === userTypes.GUEST}">
+    <div class="nav-slice-sx">
+        <img class="logo-svg" src="../../../../assets/logo_text.svg">
+    <div class="input-icon">
+      <input type="text"/>
+      <i class="fas fa-search"></i>
+    </div>
+    </div>
+   
+    <div class="nav-slice-dx">
+      <nav-link  *ngFor = "let link of navLinks" [link]="link"></nav-link>
+      <ngx-avatar  name="Davide Sala"></ngx-avatar>
+    </div>
+  
+  </nav>
+  
+  

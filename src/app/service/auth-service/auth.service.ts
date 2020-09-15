@@ -4,14 +4,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Params, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Maybe, UsersPermissionsUser } from 'src/types/schema';
+import { BasicUser, BusinessUser, Maybe, UsersPermissionsUser } from 'src/types/schema';
+import { UserWrapper } from 'src/app/class/UserWrapper';
+import { Apollo } from 'apollo-angular';
 
 export type User = {
   username?: string,
   email: string,
   name?: string,
-  basic_user?: string,
-  business_user?:string,
+  basic_user?: string | BasicUser,
+  business_user?:string | BusinessUser,
 }
 
 // 1
@@ -23,7 +25,7 @@ export class AuthService {
   // 2
   private userId: string = null;
 
-  public _user: BehaviorSubject<Maybe<User>> = new BehaviorSubject(null);
+  public _user: BehaviorSubject<Maybe<UserWrapper>> = new BehaviorSubject(null);
 
   public jwt: BehaviorSubject<string> = new BehaviorSubject(null);
 
@@ -31,7 +33,7 @@ export class AuthService {
 
   public didFail: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private apollo: Apollo) {
   }
 
   // 4
@@ -39,13 +41,14 @@ export class AuthService {
     return this._isAuthenticated;
   }
 
-  set currentUser(user: Maybe<User>) {
-    console.log(user);
+  set currentUser(user_: Maybe<User>) {
     //@ts-ignore 
+    const user = user_ ? new UserWrapper(user_) : null
     this._user.next(user);
+    
   }
 
-  get user(): BehaviorSubject<Maybe<User>>  { return this._user }
+  get user(): BehaviorSubject<Maybe<UserWrapper>>  { return this._user }
 
   // 5
   saveUserData(id: string, token: string) {
@@ -84,9 +87,8 @@ export class AuthService {
         if(!user) {
           throw new Error('User not found');
         }
-        
-        this.currentUser = user;
         this.setUserData(id, jwt);
+        this.currentUser = user;
       },
       (err)=>{
         console.log(err);
@@ -138,6 +140,7 @@ export class AuthService {
     .subscribe(({user, jwt}: any)=>{
       this.saveUserData(user.id, jwt);
       this.currentUser = user;
+      console.log(user);
       this.router.navigate(['/profile/business']);
     },
     error => {
