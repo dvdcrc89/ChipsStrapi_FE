@@ -9,8 +9,6 @@ const routes: Routes = [
   { path: '', component: ProfileComponent },
   { path: 'business', component: BusinessComponent },
   { path: 'me', component: UserProfileComponent },
-
-  
 ];
 
 @NgModule({

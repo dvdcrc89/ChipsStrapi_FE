@@ -12,19 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgmCoreModule } from '@agm/core';
 import { environment } from 'src/environments/environment';
 
-import { FooterComponent } from './components/shared/footer/footer.component';
-import { BusinessLandingPageComponent } from './pages/business-landing-page/business-landing-page.component';
-import { PersonalLandingPageComponent } from './pages/personal-landing-page/personal-landing-page.component';
-import { NavComponent } from './components/shared/nav/nav.component';
-
-
 @NgModule({
   declarations: [
     AppComponent,
-    BusinessLandingPageComponent,
-    PersonalLandingPageComponent,
-    FooterComponent,
-    NavComponent
   ],
   imports: [
     CommonModule,
