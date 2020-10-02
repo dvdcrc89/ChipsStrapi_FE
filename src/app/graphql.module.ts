@@ -9,7 +9,7 @@ import { GC_AUTH_TOKEN } from './service/auth-service/constants';
 
 const uri = `${environment.url}/graphql`; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink) {
-  console.log("CREATE APOLLO")
+  console.log('CREATE APOLLO')
   const token = localStorage.getItem(GC_AUTH_TOKEN);
   const auth = setContext((operation, context) => ({
     headers: {

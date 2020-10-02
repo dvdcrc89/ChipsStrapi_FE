@@ -1,16 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-export interface IBusinessUser {
-  business_user: {
-    restaurant: {
-      name: string,
-      website: string,
-      latitude: number,
-      longitude: number,
-      address: string,
-    }
-  }
-}
+import { Jobs, Maybe, Restaurant } from 'src/types/schema';
+import {faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-restaurant',
@@ -20,11 +10,21 @@ export interface IBusinessUser {
 
 export class RestaurantComponent implements OnInit {
   @Input()
-  businessUser: IBusinessUser;
+  businessUser: Restaurant;
 
+  showApplicants: Maybe<Jobs>
+
+  faArrowLeft = faArrowLeft
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  seeApplicants(job: Jobs){
+    this.showApplicants = job;
+  }
+
+  back() {
+    this.showApplicants = null;
+  }
 }

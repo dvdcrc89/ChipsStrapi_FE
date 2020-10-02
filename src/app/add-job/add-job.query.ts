@@ -1,4 +1,4 @@
-import gql from "graphql-tag"
+import gql from 'graphql-tag'
 
 export const PROFILE_QUERY = gql`
     query BusinessUser($id: ID!) {
@@ -8,10 +8,10 @@ export const PROFILE_QUERY = gql`
           id
         }
       }
-    } 
+    }
   `
-  
-  
+
+
   export const JOB_MUTATION = gql`
       mutation CreateJob($job: JobInput) {
         createJob(input: { data: $job }) {
@@ -19,7 +19,7 @@ export const PROFILE_QUERY = gql`
                 id,
                 Type,
                 shift_date{
-                date { 
+                date {
                     Date,
                     StartAt,
                     EndAt
@@ -27,16 +27,16 @@ export const PROFILE_QUERY = gql`
                 },
                 description,
                 payPerHour,
-                position    
-             }  
+                position
+             }
         }
   }`
-  
+
   export const SHIFT_MUTATION = gql`
   mutation CreateShiftDate($shift_date: ShiftDateInput) {
     createShiftDate(input: { data: $shift_date }) {
         shiftDate{
             id
-         }  
+         }
     }
   }`

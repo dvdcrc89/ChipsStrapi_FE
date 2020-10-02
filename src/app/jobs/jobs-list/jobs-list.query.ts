@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const JOBS_QUERY =
     gql`
@@ -31,7 +31,7 @@ export const JOBS_QUERY =
             count
           }
         }
-      } 
+      }
     `
 
   export const JOBS_APPLICATIONS =  gql`
@@ -45,15 +45,15 @@ export const JOBS_QUERY =
             }
          }
         }
-    } 
+    }
     `
   export const APPLY_MUTATION = gql`
   mutation CreateJobsApplication($basic_user:ID!, $job:ID!) {
     jobsApplicationToggle(input: { data:{job:$job, basic_user:$basic_user}})
   }`
-  
-  
-  export const HAS_APPLIED = gql` 
+
+
+  export const HAS_APPLIED = gql`
   query HasAppliedToJob($jobid:ID!, $userid:ID!) {
       hasAppliedToJob(jobid: $jobid, userid: $userid)
   }`

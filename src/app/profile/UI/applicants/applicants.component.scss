@@ -1,0 +1,30 @@
+.container {
+    position: relative;
+    -webkit-box-shadow: 0 0 5px 0 #ccc;
+    -moz-box-shadow: 0 0 5px 0 #ccc;
+    box-shadow: 0 0 5px 0 #ccc;
+    border-radius: 4px;
+    margin-top: 12px;
+    padding: 1.8rem;
+    background-color: #fff;
+    display: grid;
+    margin-top: 3.5rem;
+}
+
+.image {
+    position: absolute;
+    top: -3rem;
+    left: 3%;
+}
+
+.info {
+    font-size: 2rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: start;
+    >*{
+        margin: 1rem;
+    }
+}

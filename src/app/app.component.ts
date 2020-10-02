@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
         console.log(`Authenticated: ${isAuthenticated} `)
         this.isAuthenticated = isAuthenticated
     });
-    
+
   }
 
 

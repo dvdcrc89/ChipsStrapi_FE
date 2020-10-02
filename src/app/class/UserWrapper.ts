@@ -47,7 +47,7 @@ export class UserWrapper {
     }
 
     private _business_user: string;
-    
+
     public get business_user(): string {
         return this._business_user;
     }

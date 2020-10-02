@@ -16,14 +16,14 @@ export class JobsListComponent implements OnInit {
   public totalJobs$:  Observable<number>
 
   /** Starting index to pull Jobs */
-  public cursor:      number = 0;
+  public cursor = 0;
 
   /** Current shown page */
-  public currentPage: number = 1;
+  public currentPage = 1;
 
   /** Number of Jobs per page */
-  public itemPerPage: number = 4;
-  
+  public itemPerPage = 50;
+
   /** User applications */
   public jobsApplication: {[key: number]: boolean} = {}
 
@@ -57,7 +57,7 @@ export class JobsListComponent implements OnInit {
 
   /**
    * Changes page
-   * @param page 
+   * @param page
    */
   public changePage(page: number){
     this.cursor = (page-1)*this.itemPerPage;
@@ -67,7 +67,7 @@ export class JobsListComponent implements OnInit {
 
   /**
    * Applys to job
-   * @param job_id 
+   * @param job_id
    */
   public applyToJob(job_id: string){
     this.jobsListService.applyToJob(job_id)

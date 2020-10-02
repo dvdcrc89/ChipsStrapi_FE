@@ -31,7 +31,7 @@ export class JobcardComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    console.log(this.job, "job");
+    console.log(this.job, 'job');
   }
   showDate(date) {
     console.log(date);
