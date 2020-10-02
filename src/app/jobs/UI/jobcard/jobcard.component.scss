@@ -1,57 +1,365 @@
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4em;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: normal;
+  font-weight: bold;
+  font-size: 2em;
+  margin: 0px;
+}
+
+h3 {
+  font-family: 'Hind Madurai', sans-serif;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  font-size: 1.15em;
+  margin: 0px;
+}
+
+p {
+  font-family: 'Hind Madurai', sans-serif;
+  font-weight: lighter;
+  letter-spacing: 1.5px;
+  font-size: 1em;
+}
+
+a {
+  font-family: 'Hind Madurai', sans-serif;
+  font-weight: lighter;
+  font-size: 1em;
+}
+
+hr {
+  border: 0.5px solid #4a4a4a17;
+}
+
+.clock {
+  font-size: 10px;
+}
+
+.per-h {
+  display: flex;
+  align-items: center;
+}
+
+.multishift-details {
+  p {
+    span{
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}
+
+
 .job_card{
-    -webkit-box-shadow: 0 0 5px 0 #ccc;
-    -moz-box-shadow: 0 0 5px 0 #ccc;
-    box-shadow: 0 0 5px 0 #ccc;
-    border-radius: 4px;
-    margin-top: 12px;
-    padding: 12px 12px 19px 12px;
-    background-color: #fff;
-    
+  position: relative;
+  -webkit-box-shadow: 0 0 5px 0 #ccc;
+  -moz-box-shadow: 0 0 5px 0 #ccc;
+  box-shadow: 0 0 5px 0 #ccc;
+  border-radius: 4px;
+  margin-top: 12px;
+  padding: 1.8rem;
+  background-color: #fff;
+}
+
+.controller {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .material-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .title{
-    font-size: 3rem;
-    color: forestgreen;
-    border-bottom: 3px solid chartreuse;
     margin: 0 0 1rem 0;
+    cursor: pointer;
+}
+
+.title-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.show-more {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pay {
+  margin-right: 10px;
 }
 
 .job-position{
     font-size: 1.5rem;
-    color: fuchsia;
+    font-weight: bold;
 }
+
 .job_card{
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    display: block;
 }
 
 .job_map{
     justify-self: self-end;
 }
-.shift-date {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border: 1px solid yellowgreen;
-    padding: 0.5rem;
-    margin: 0 0 0.4rem 0;
+
+.toggled .shift-date:not(:first-child) {
+  display: flex;
+}
+
+.toggled {
+  .shift-date {
+    display: flex;
+    align-items: center;
     font-weight: bold;
     color: #4d4d4d;
+    justify-content: space-between;
+
+    .cta {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 40px;
+        cursor: pointer;
+      }
+
+      button:first-of-type {
+        margin-right: 10px;
+      }
+
+    @media all and (max-width: 480px) {
+
+      button{
+        margin-right: 0px;
+      }
+      button:first-of-type {
+        margin-bottom: 10px;
+        margin-right: 0px;
+      }
+
+        display: flex;
+        flex-direction: column;
+        align-self: flex-end;
+      }
+    }
+
+    .details {
+      display: flex;
+      @media all and (max-width: 480px) {
+        display: block;
+          p:last-of-type{
+            margin-bottom: 0px;
+          }
+        }
+    }
+
+    p {
+      margin-right: 10px;
+    }
+  }
 }
 
-.job_description{
-    padding: 0.5rem;
-    margin: 1rem;
-    border: 1px solid goldenrod;
+ngx-avatar {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
-.job_map{
+.shift-dates .shift-date:not(:first-child) {
+  display: none;
+}
+
+.shift-dates {
+  display: flex;
+
+  @media all and (max-width: 480px) {
+  }
+
+  .shift-date {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    color: #4d4d4d;
+    justify-content: space-between;
+
+    .cta {
+      display: flex;
+      align-items: center;
+
+      span {
+        font-size: 40px;
+        cursor: pointer;
+      }
+
+      button:first-of-type {
+        margin-right: 10px;
+      }
+
+    @media all and (max-width: 480px) {
+
+      button{
+        margin-right: 0px;
+      }
+      button:first-of-type {
+        margin-bottom: 10px;
+        margin-right: 0px;
+      }
+
+        display: flex;
+        flex-direction: column;
+        align-self: flex-end;
+      }
+    }
+    .details {
+      display: flex;
+      @media all and (max-width: 480px) {
+        display: block;
+          p:last-of-type{
+            margin-bottom: 0px;
+          }
+        }
+    }
+
+    p {
+      margin-right: 10px;
+    }
+  }
+}
+
+.job_map {
     width: 88%;
     height: 100%;
     background:gold;
 }
 
-.pay{
-    font-size: 1.5rem;
-    color: blueviolet;
+.pay {
     font-weight: bolder;
+}
+
+
+
+span {
+}
+
+.hero-img {
+  // background-color: $primaryColor;
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  clip-path: polygon(55% 0%, 100% 38%, 100% 100%, 0 100%, 0 0);
+  z-index: -1;
+}
+
+.card {
+  width: 300px;
+  height: 150px;
+  margin-bottom: 20px;
+
+   h3 {
+     margin: 0;
+   }
+}
+
+.secondary-button {
+}
+
+// .hero-content {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: flex-start;
+
+//   div:last-child {
+//     display: flex;
+//     align-items: center;
+//   }
+// }
+
+.card-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sticky-cta {
+  display: flex;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 2rem;
+  position: fixed;
+  z-index: 110;
+  bottom: 0px;
+  right: 0px;
+  min-height: 4.5rem;
+  width: 100vw;
+  background: rgb(255, 255, 255);
+  box-shadow: rgba(25, 28, 31, 0.04) 0px -4px 8px, rgba(25, 28, 31, 0.04) 0px -1px 0px;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.card-section-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+   div {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+
+     h3 {
+      text-align: center;
+     }
+    }
+}
+
+input {
+  height: 30px;
+  margin-right: -10px;
+  border: 1px solid;
+  border-color: #0000003d;
+}
+
+@media all and (max-width: 480px) {
+  .hero-content {
+    display: flex;
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0px;
+
+    div:last-child {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .container {
+    width: 90%;
+  }
+
+  .card-section {
+    margin-top: 0px;
+  }
+
+  .card-section {
+    justify-content: center;
+    text-align: center;
+  }
+
 }

@@ -1,36 +1,56 @@
 <div class="job_card">
-    <div class ="card_content">
-      <div class="title">
-        <span>{{job.restaurant.name}}</span>
-      </div>
-      <span class="job-position">{{job.position}}</span>
-      <div class="card_footer">
-        <div class="job_info">
-          <div class="job_description">
-           {{job.description}}
-          </div>
-          <p class="pay">Pay: {{job.payPerHour}}£/h</p>
-            <div class="shift-dates">
-                <h4>Shift Dates:</h4>
-                <div class="shift-date" *ngFor="let date of job.shift_date.date">
-                    <span class="">Date: {{date.Date| date: 'dd/MM/yyyy'}}</span>
-                    <!-- Create custom pipe for time-->
-                    <span class="blue">Start at: {{date.Date+'T'+date.StartAt| date:'shortTime'}}</span>
-                    <span class="blue">End at: {{date.Date+'T'+date.EndAt | date:'shortTime'}}  </span>
-                </div>
-            </div>
-            <button *ngIf="!applied" (click)="toggleJob()"> APPLY </button>
-            <button *ngIf="applied" (click)="toggleJob()"> DISAPPLY </button>
-        </div>
-      
-        </div>
-      </div>
-      <div class="job_map">
-        <job-map
-        [latitude]="job.restaurant.latitude"
-        [longitude]="job.restaurant.longitude"
-        [title]="job.restaurant.name"
-        ></job-map>  
+  <div class="clip"></div>
+  <ngx-avatar [name]="sanitizedName"></ngx-avatar>
+  <div class="card_content">
+    <div class="title">
+      <h2>{{job.restaurant.name}}</h2>
+      <hr>
     </div>
-
+    <div class="title-content">
+      <h3 class="job-position">{{job.position}}</h3>
+      <div class="per-h">
+        <p class="pay">{{job.payPerHour}}</p>
+        <p class="h">1h/ </p>
+        <fa-icon [icon]="faPoundSign"></fa-icon>
+      </div>
+    </div>
+    <div class="card_footer">
+      <div class="job_info">
+        <div class="job_description">
+          <p>
+            {{(job.description | slice : 0 : 250  )}}...
+          </p>
+        </div>
+        <div class="controller">
+          <div class="shift-dates" [className]="toggled ? 'toggled' : 'shift-dates'">
+            <div class="shift-date" *ngFor="let date of job.shift_date.date" (click)="showDate(date)">
+              <div class="multishift-details" *ngIf="!toggled && job.shift_date.date.length > 1">
+                <p><span>{{job.shift_date.date.length}}</span> shifts available</p>
+              </div>
+              <div class="details" *ngIf="toggled || job.shift_date.date.length == 1">
+                <p class="">
+                  <fa-icon [icon]="faCalendar"></fa-icon>
+                  {{date.Date| date: 'dd/MM/yyyy'}}
+                </p>
+                <!-- Create custom pipe for time-->
+                <p class="blue">
+                  <fa-icon [icon]="faAngleUp"></fa-icon>
+                  {{date.Date+'T'+date.StartAt| date:'shortTime'}}
+                </p>
+                <p class="blue">
+                  <fa-icon [icon]="faAngleDown"></fa-icon>
+                  {{date.Date+'T'+date.EndAt | date:'shortTime'}}
+                </p>
+              </div>
+            </div>
+            <span class="material-icons" (click)="toggleShiftsList()" *ngIf="job.shift_date.date.length > 1">
+              keyboard_arrow_down
+            </span>
+          </div>
+          <div class="cta">
+            <button class="secondary-button" *ngIf="!applied" (click)="toggleJob()"> Apply </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>

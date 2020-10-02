@@ -9,12 +9,17 @@ import { environment } from 'src/environments/environment';
 import { JobPaginatorComponent } from './UI/job-paginator/job-paginator.component';
 import { JobsListComponent } from './jobs-list/jobs-list.component';
 
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AvatarModule } from 'ngx-avatar';
+
 
 @NgModule({
-  declarations: [JobcardComponent, JobsListComponent, JobMapComponent, JobPaginatorComponent],
+  declarations: [JobcardComponent, JobsListComponent, JobMapComponent, JobPaginatorComponent ],
   imports: [
+    FontAwesomeModule,
     CommonModule,
     JobsRoutingModule,
+    AvatarModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: environment.googleAPI
     }),
