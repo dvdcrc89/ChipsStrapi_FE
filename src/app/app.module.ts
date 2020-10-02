@@ -15,12 +15,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AvatarModule, AvatarConfig } from 'ngx-avatar';
 import { NavbarService } from './navbar/navbar.service';
 import { NavLinkComponent } from './navbar/nav-link/nav-link.component';
-
 
 @NgModule({
   declarations: [
@@ -50,7 +49,7 @@ import { NavLinkComponent } from './navbar/nav-link/nav-link.component';
   ],
   providers: [AuthService, NavbarService,
     {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},],
- 
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

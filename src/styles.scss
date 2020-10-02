@@ -7,3 +7,39 @@ html, body {
     width:100%;
     margin: 0;
 }
+
+button {
+  display: inline-block;
+  padding: 8px ;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease 0s;
+  font-family: 'Montserrat', sans-serif;
+  }
+
+
+.primary-button {
+  border: 0.5px solid black;
+  color: rgb(255, 255, 255);
+  background-color: black
+}
+
+.secondary-button {
+  border: 0.5px solid black;
+  color: black;
+  background-color: white;
+}
+
+.secondary-button:hover {
+  background-color: black;
+  color: white;
+}
+
+.primary-button:hover {
+  background-color: white;
+  color: black;
+}
