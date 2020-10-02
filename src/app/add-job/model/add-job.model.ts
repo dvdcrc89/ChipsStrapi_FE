@@ -6,7 +6,7 @@ export type ShiftDateGroup = {
     StartAt:  (string | ((control: AbstractControl) => ValidationErrors))[],
     EndAt:    (string | ((control: AbstractControl) => ValidationErrors))[]
   }
-  
+
   export type CreateShiftDateWithPayload = {
       createShiftDate: CreateShiftDatePayload
   }

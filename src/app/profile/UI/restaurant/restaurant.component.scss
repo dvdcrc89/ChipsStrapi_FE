@@ -1,0 +1,41 @@
+.restaurant_container {
+    width:80%;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 0 5px 0 #ccc;
+    -moz-box-shadow: 0 0 5px 0 #ccc;
+    box-shadow: 0 0 5px 0 #ccc;
+    border-radius: 4px;
+    min-height: 100vh;
+}
+
+.restaurant_jobs {
+    width:80%;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.restaurant_info {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.restaurant_address{
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.job-container{
+    padding:1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    >* {
+        margin: 1rem;
+    }
+}
+
+fa-icon{
+    cursor: pointer;
+}

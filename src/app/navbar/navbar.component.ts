@@ -8,13 +8,32 @@ import {NavbarService} from './navbar.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public isMenuOpen: boolean = false;
-  public profilePic: string = ''
-  public visible: boolean = true;
+  constructor(private navbarService: NavbarService) { }
+  public isMenuOpen = false;
+  public profilePic = ''
+  public visible = true;
   public userType: STATUS;
   public navLinks: Array<{text: string, ref: string}> = []
   public userTypes = STATUS
-  constructor(private navbarService: NavbarService) { }
+
+
+
+  /********** MAYBE TO MOVE THIS ON BACKEND ***********/
+  BUSINESS = [
+    {text: 'Jobs Market', ref: '/jobs'},
+    {text: 'Profile', ref: '/profile/business'},
+    {text: 'Add Job', ref: '/addJob'},
+  ]
+
+  USER = [
+    {text: 'Jobs Market', ref: '/jobs'},
+    {text: 'Profile', ref: '/profile/me'},
+  ]
+
+  GUEST = [
+    {text: 'Job Seeker', ref: '/auth/user'},
+    {text: 'Business', ref: '/auth/business/signin'},
+  ]
 
   ngOnInit(): void {
     this.navbarService.load().subscribe((user)=>{
@@ -36,24 +55,5 @@ export class NavbarComponent implements OnInit {
   public openMenu(){
     this.isMenuOpen = !this.isMenuOpen;
   }
-
-
-
-  /********** MAYBE TO MOVE THIS ON BACKEND ***********/
-  BUSINESS = [
-    {text: 'Jobs Market', ref: '/jobs'},
-    {text: 'Profile', ref: '/profile/business'},
-    {text: 'Add Job', ref: '/addJob'},
-  ]
-
-  USER = [
-    {text: 'Jobs Market', ref: '/jobs'},
-    {text: 'Profile', ref: '/profile/me'},
-  ]
-
-  GUEST = [
-    {text: 'Job Seeker', ref: '/auth/user'},
-    {text: 'Business', ref: '/auth/business/signin'},
-  ]
 }
 

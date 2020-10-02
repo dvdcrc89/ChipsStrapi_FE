@@ -1,0 +1,23 @@
+<div class='container'>
+    <div class="info">
+        <div class='title'>
+            <h3>{{job.position}} </h3>
+            <p>{{job.shift_date.date.length}} Shift(s)</p>
+        </div>
+        <div class='shifts'>
+            <p>{{job.shift_date.date[0].Date | date}}</p>
+        </div>
+        <div class="applicants">
+            <p>{{job.job_applications.length}} Applicants</p>
+        </div>
+        <div class="footer">
+            <p>Posted {{job.created_at | date}}</p>
+        </div>
+    </div>
+   <div class="actions">
+    <button class="secondary-button" > Edit </button>
+    <button class="secondary-button" [disabled]="job.job_applications.length === 0" (click)="seeApplicants()" > See Applicants </button>
+    <button class="secondary-button" > Delete </button>
+
+   </div>
+</div>

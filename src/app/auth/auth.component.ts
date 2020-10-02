@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { filter, switchMap } from 'rxjs/operators';
 import { AuthService } from '../service/auth-service/auth.service';
@@ -12,15 +12,15 @@ import { Subscription } from 'rxjs';
 })
 export class AuthComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private authService: AuthService) { }
+  constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) { }
   public loading = false;
   private validProvider = ['facebook', 'google'];
   private paramMap$: Subscription;
   private queryParam$: Subscription;
 
   ngOnInit() {
-    this.paramMap$ = this.route.paramMap.subscribe(params => { 
-      const provider = params.get('provider'); 
+    this.paramMap$ = this.route.paramMap.subscribe(params => {
+      const provider = params.get('provider');
       this.queryParam$ = this.validProvider.includes(provider) && this.callback(provider)
     })
   }
@@ -42,6 +42,7 @@ export class AuthComponent implements OnInit {
         this.authService.saveUserData(user.id, jwt);
         this.authService.currentUser = user;
         this.loading = false;
+        this.router.navigate(['/jobs'])
       }
     })
   }
@@ -49,6 +50,6 @@ export class AuthComponent implements OnInit {
   ngOnDestroy(): void {
     this.paramMap$ && this.paramMap$.unsubscribe();
     this.queryParam$ && this.queryParam$.unsubscribe();
-    
+
   }
 }

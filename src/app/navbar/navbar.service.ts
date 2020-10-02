@@ -14,5 +14,5 @@ export class NavbarService {
     return this.authService.user
   }
 
-  
+
 }

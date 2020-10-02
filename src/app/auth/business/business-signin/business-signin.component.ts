@@ -23,7 +23,7 @@ export class BusinessSigninComponent implements OnInit {
     .subscribe((value)=>{
       this.didFail = value
     });
-    
+
     this.usrForm = this.fb.group(
       {
         email:    ['', Validators.email],
@@ -39,7 +39,7 @@ export class BusinessSigninComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.didFail$.unsubscribe();
-    
+
   }
 
 }

@@ -10,18 +10,18 @@ import { Observable, Subscription } from 'rxjs';
 export class JobPaginatorComponent implements OnInit {
   @Input()
   public totalItems$: Observable<number>;
-  
+
   @Input()
   public itemPerPage: number;
-  
+
   @Input()
   public currentPage: number;
-  
+
   @Output()
   public pageEmitter: EventEmitter<number> = new EventEmitter();
 
   public totalPages: number
-  
+
   public totalPagesArray: number[];
 
   public totalItems_sub$: Subscription;
@@ -36,7 +36,7 @@ export class JobPaginatorComponent implements OnInit {
         this.totalPagesArray = [...Array(this.totalPages).keys()]
       }
     )
-    
+
   }
 
   changePage(page: number){
@@ -45,6 +45,6 @@ export class JobPaginatorComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-   this.totalItems_sub$.unsubscribe(); 
+   this.totalItems_sub$.unsubscribe();
   }
 }

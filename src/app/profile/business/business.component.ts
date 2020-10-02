@@ -8,36 +8,11 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ApolloQueryResult } from 'apollo-client';
 import { STATUS } from 'src/app/class/UserWrapper';
+import { map } from 'rxjs/operators';
+import { BusinessService } from './business.service';
+import { Restaurant } from 'src/types/schema';
 
-const PROFILE_QUERY = (id: string): DocumentNode =>{
-  return gql`
-  query BusinessUser {
-    businessUser(id:${id}) {
-      id,
-      restaurant {
-        id,
-        name,
-        website,
-        address,
-        latitude,
-        longitude,
-        jobs {
-          id,
-          Type,
-          shift_date{
-            id,
-            date{
-              Date,
-              StartAt,
-              EndAt
-            }
-          }
-        }
-      }
-    }
-  } 
-`
-} 
+
 
 @Component({
   selector: 'app-business',
@@ -46,11 +21,11 @@ const PROFILE_QUERY = (id: string): DocumentNode =>{
 })
 export class BusinessComponent implements OnInit {
 
-  businessProfile$: Observable<ApolloQueryResult<any>>
+  businessProfile$: Observable<ApolloQueryResult<Restaurant>>
 
   constructor(
-    private authService: AuthService, 
-    private apollo: Apollo,
+    private authService: AuthService,
+    private businessService: BusinessService,
     private router: Router) {}
 
   ngOnInit(): void {
@@ -62,18 +37,13 @@ export class BusinessComponent implements OnInit {
         const { business_user, status } = user;
           status === STATUS.BASIC_USER && this.router.navigate(['/profile/me'])
           if(status === STATUS.BUSINESS_USER){
-            this.businessProfile$ = this.runProfileQuery(business_user);
+            this.businessProfile$ = this.businessService.getRestaurant(business_user);
           }
-        } 
-      
+        }
+
     )
   }
 
-  private runProfileQuery(id: string) {
-    return this.apollo
-            .watchQuery<any>({
-              query: PROFILE_QUERY(id)
-            }).valueChanges;
-   }
+
 
 }

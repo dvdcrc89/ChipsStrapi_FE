@@ -1,1 +1,37 @@
-{{businessUser | json}}
+<div class="restaurant_container" *ngIf="businessUser">
+    <fa-icon [icon]="faArrowLeft" (click)="back()" *ngIf="showApplicants"></fa-icon>
+    <div class="restaurant_info">
+        <div class="left-info">
+            <div class="restaurant_name">
+                <h2>{{businessUser.name}}</h2>
+            </div>
+            <div class="restaurant_address">
+                {{businessUser.address}}
+            </div>
+            <div class="restaurant_bio">
+                {{businessUser.bio}}
+            </div>
+            <div class="restaurant_website" *ngIf="businessUser.website">
+                <a [href]="businessUser.website" target="_blank" >{{businessUser.website}}</a>
+            </div>
+        </div>
+        <div class ="restaurant_image">
+            <ngx-avatar [src]="businessUser.profilePic" [name]="businessUser.name" size="100"></ngx-avatar>
+        </div>
+    </div>
+    <div class="job-container" *ngIf="!showApplicants">
+            <job-card-action
+                *ngFor = "let job of businessUser.jobs"
+                [job]="job"
+                (applicants)="seeApplicants($event)">
+            </job-card-action>
+    </div> 
+    <div class="tab-container" *ngIf="showApplicants">
+       <applicants 
+       *ngFor="let user of showApplicants.job_applications"
+       [application]="user">
+       </applicants>
+    </div> 
+ 
+       
+</div>

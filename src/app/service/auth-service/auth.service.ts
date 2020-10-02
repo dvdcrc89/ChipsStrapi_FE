@@ -42,10 +42,9 @@ export class AuthService {
   }
 
   set currentUser(user_: Maybe<User>) {
-    //@ts-ignore 
-    const user = user_ ? new UserWrapper(user_) : null
+    // @ts-ignore
+    const user =  user_ ? new UserWrapper(user_) : new UserWrapper({})
     this._user.next(user);
-    
   }
 
   get user(): BehaviorSubject<Maybe<UserWrapper>>  { return this._user }
@@ -82,7 +81,7 @@ export class AuthService {
     const jwt = localStorage.getItem(GC_AUTH_TOKEN);
     if (id && jwt) {
       this.getProfile(jwt)
-      .subscribe((user: Maybe<User>,...rest) => {
+      .subscribe((user: Maybe<User>) => {
         console.log(user);
         if(!user) {
           throw new Error('User not found');
@@ -95,12 +94,12 @@ export class AuthService {
         this.didFail.next(true);
         this.logout();
       })
-      
+
     }
   }
 
   getProfile(jwt: string){
-    return this.http.get(`${environment.url}/users/me`, {headers: {'Authorization': `Bearer ${jwt}`}});
+    return this.http.get(`${environment.url}/users/me`, {headers: {Authorization: `Bearer ${jwt}`}});
   }
 
   googleAuth(){

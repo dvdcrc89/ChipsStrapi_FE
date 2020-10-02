@@ -22,9 +22,9 @@ export class JobsListService {
 
   /**
    * Runs jobs query
-   * @param limit 
-   * @param start 
-   * @returns jobs query 
+   * @param limit
+   * @param start
+   * @returns jobs query
    */
   private runJobsQuery(limit: number, start: number): Observable<ApolloQueryResult<JobsWithCount>> {
     return this.apollo
@@ -39,9 +39,9 @@ export class JobsListService {
 
    /**
     * Gets jobs
-    * @param limit 
-    * @param start 
-    * @returns jobs 
+    * @param limit
+    * @param start
+    * @returns jobs
     */
    public getJobs(limit: number, start: number): Observable<Jobs[]> {
     return this.authService._user
@@ -54,9 +54,9 @@ export class JobsListService {
 
    /**
     * Gets total jobs
-    * @param limit 
-    * @param start 
-    * @returns total jobs 
+    * @param limit
+    * @param start
+    * @returns total jobs
     */
    public getTotalJobs(limit,start): Observable<number>{
     return  this.authService._user
@@ -70,10 +70,10 @@ export class JobsListService {
 
   /**
    * Gets jobs application
-   * @returns jobs application 
+   * @returns jobs application
    */
   public getJobsApplication(): Observable<{[key: number]: boolean}> {
-    const mapToObject = ({data})=> data?.basicUser?.job_applications ? 
+    const mapToObject = ({data})=> data?.basicUser?.job_applications ?
                                   data?.basicUser?.job_applications.reduce(
                                       (acc,el)=>({...acc,[el.job.id]: true})
                                     ,Object.create(null)) : Object.create(null);
@@ -94,8 +94,8 @@ export class JobsListService {
 
   /**
    * Runs jobs application query
-   * @param id 
-   * @returns  
+   * @param id
+   * @returns
    */
   private runJobsApplicationQuery(id: string) {
     return this.apollo
@@ -110,10 +110,10 @@ export class JobsListService {
 
    /**
     * Apply to a job, if has applied already cancel application
-    * @param job_id 
-    * @returns to job 
+    * @param job_id
+    * @returns to job
     */
-   public applyToJob(job_id: string): 
+   public applyToJob(job_id: string):
    Observable<FetchResult<any, Record<string, any>, Record<string, any>>>{
      console.log(job_id);
     return this.authService._user
@@ -129,7 +129,7 @@ export class JobsListService {
                     }
                   })
                 }
-              }),  
+              }),
             )
     }
 }

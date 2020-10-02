@@ -6,7 +6,7 @@ import { ShiftDateGroup } from './model/add-job.model';
 import { AddJobService } from './add-job.service';
 
 
-/** 
+/**
  * TO DO
  * Move logic inside service ?
  * Divide Shift Dates in his own component
@@ -14,7 +14,7 @@ import { AddJobService } from './add-job.service';
  * - Date is in the future
  * - StartAt is lower than EndAt (allow EndAt lower then StartAt for night shift, but show warning)
  * - Merge Type and Position in one select
- * 
+ *
 */
 
 
@@ -24,34 +24,16 @@ import { AddJobService } from './add-job.service';
   styleUrls: ['./add-job.component.scss']
 })
 export class AddJobComponent implements OnInit {
-  
-  /** Reactive Form */
-  public addForm: FormGroup;
-
-  /**Server comunication has failed */
-  public didFail: boolean = false;
-  
-  /** Data is loading */
-  public loading: boolean;
-
-  /** Restaurant  of add job component */
-  private restaurant: Pick<Restaurant, "name" | "id">;
 
   /**
    * Creates an instance of add job component.
-   * @param authService 
-   * @param fb 
-   * @param apollo 
+   * @param authService
+   * @param fb
+   * @param apollo
    */
   constructor(
     public fb: FormBuilder,
     private addJobService: AddJobService) { }
-
-  
-  /** Form Submit */
-  onSubmit(){
-    this.runMutation();
-  }
 
   /** Gets shift dates AbstractControl Array */
   get shift_dates(): AbstractControl[] {
@@ -63,12 +45,30 @@ export class AddJobComponent implements OnInit {
     return this.addForm.get('shift_date') as FormArray
   }
 
+  /** Reactive Form */
+  public addForm: FormGroup;
+
+  /**Server comunication has failed */
+  public didFail = false;
+
+  /** Data is loading */
+  public loading: boolean;
+
+  /** Restaurant  of add job component */
+  private restaurant: Pick<Restaurant, 'name' | 'id'>;
+
   /** Shift date Form Group */
   private shiftDateGroup: ShiftDateGroup  = {
     Date:     [ '', Validators.required ],
     StartAt:  [ '', Validators.required ],
     EndAt:    [ '', Validators.required ]
   };
+
+
+  /** Form Submit */
+  onSubmit(){
+    this.runMutation();
+  }
 
   ngOnInit(): void {
     this.loading = true;
@@ -86,7 +86,7 @@ export class AddJobComponent implements OnInit {
 
   /**
    * Init Add Job Form
-   * @param restaurantID 
+   * @param restaurantID
    */
   initForm(restaurantID: string){
     this.addForm = this.fb.group(
@@ -110,21 +110,21 @@ export class AddJobComponent implements OnInit {
 
   /**
    * Removes Shift date from Array Builder
-   * @param i 
+   * @param i
    */
   remove(i: number){
     this.shiftsAsArray.removeAt(i);
   }
 
 
-  
+
 
    /** Runs Add Job Mutation */
    private runMutation(){
      this.addJobService.createNewJob(this.addForm.value)
      .subscribe(
        ()=>{
-        //TO DO, RESET FORM, MAYBE REDIRECT
+        // TO DO, RESET FORM, MAYBE REDIRECT
         this.didFail = false
        },
       ()=>{

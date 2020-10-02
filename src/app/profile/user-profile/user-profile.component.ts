@@ -31,9 +31,9 @@ const PROFILE_QUERY = (id: string): DocumentNode =>{
         }
       }
     }
-  } 
+  }
 `
-} 
+}
 
 @Component({
   selector: 'app-user-profile',
@@ -45,7 +45,7 @@ export class UserProfileComponent implements OnInit {
   userProfile$: Observable<ApolloQueryResult<any>>
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private apollo: Apollo,
     private router: Router) {}
 
@@ -61,8 +61,8 @@ export class UserProfileComponent implements OnInit {
           if(status === STATUS.BASIC_USER) {
             this.userProfile$ = this.runProfileQuery(basic_user);
           }
-        
-        
+
+
       }
     )
   }
